@@ -1,0 +1,19 @@
+site_name: ziti - MySQL ORM for Node.js
+site_author: Alexandre Laurent
+site_favicon: favicon.png
+repo_url: https://github.com/shaoner/ziti
+pages:
+- ['index.md', 'Home']
+- ['tutorial/getting-started.md', 'Tutorial', 'Getting started']
+- ['tutorial/ziti.md', 'Tutorial', 'Configuring ziti']
+- ['tutorial/model.md', 'Tutorial', 'Model']
+- ['tutorial/queries.md', 'Tutorial', 'Queries']
+- ['tutorial/associations.md', 'Tutorial', 'Associations']
+- ['tutorial/instance.md', 'Tutorial', 'Model instances']
+- ['api/ziti.md', 'API', 'ziti']
+- ['api/model.md', 'API', 'Model']
+- ['api/instance.md', 'API', 'Instance']
+- ['api/types.md', 'API', 'Types']
+- ['about.md', 'About']
+- ['todo.md', 'TODO']
+theme: readthedocs
