@@ -2,6 +2,11 @@
 
  MySQL ORM for node.js
 
+[![npm](https://img.shields.io/npm/v/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
+[![Travis branch](https://img.shields.io/travis/shaoner/ziti/master.svg?style=flat-square)](https://travis-ci.org/shaoner/ziti)
+[![npm](https://img.shields.io/npm/l/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
+[![npm](https://img.shields.io/npm/dm/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
+
 ## Installation
 
 ```
