@@ -1,5 +1,6 @@
-# ziti
-MySQL ORM for node.js
+# <img src="/docs/images/logo.png" alt="ziti - MySQL ORM for Node.js" width="35" height="35"> ziti
+
+ MySQL ORM for node.js
 
 ## Installation
 
