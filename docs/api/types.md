@@ -847,6 +847,7 @@ Add this field to a scope or multiple scopes
   * [.ForeignKey](#types.ForeignKey) ⇒ <code>[ForeignKey](#ForeignKey)</code>
   * [.Boolean](#types.Boolean) ⇒ <code>[NumericType](#NumericType)</code>
   * [.String](#types.String) ⇒ <code>[StringType](#StringType)</code>
+  * [.NOW](#types.NOW) ⇒ <code>MysqlFunction</code>
 
 <a name="types.Bit"></a>
 ### types.Bit ⇒ <code>[BaseType](#BaseType)</code>
@@ -964,4 +965,7 @@ Add this field to a scope or multiple scopes
 **Kind**: static property of <code>[types](#types)</code>  
 <a name="types.String"></a>
 ### types.String ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[types](#types)</code>  
+<a name="types.NOW"></a>
+### types.NOW ⇒ <code>MysqlFunction</code>
 **Kind**: static property of <code>[types](#types)</code>  
