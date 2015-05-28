@@ -845,6 +845,8 @@ Add this field to a scope or multiple scopes
   * [.One](#types.One) ⇒ <code>[One](#One)</code>
   * [.Many](#types.Many) ⇒ <code>[Many](#Many)</code>
   * [.ForeignKey](#types.ForeignKey) ⇒ <code>[ForeignKey](#ForeignKey)</code>
+  * [.Boolean](#types.Boolean) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.String](#types.String) ⇒ <code>[StringType](#StringType)</code>
 
 <a name="types.Bit"></a>
 ### types.Bit ⇒ <code>[BaseType](#BaseType)</code>
@@ -957,3 +959,9 @@ Add this field to a scope or multiple scopes
 | --- | --- |
 | target | <code>string</code> &#124; <code>Model</code> | 
 
+<a name="types.Boolean"></a>
+### types.Boolean ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[types](#types)</code>  
+<a name="types.String"></a>
+### types.String ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[types](#types)</code>  
