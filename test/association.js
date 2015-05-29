@@ -32,7 +32,7 @@ describe('Associations', function () {
             var UserLanguage = ziti.get('UserLanguage');
             expect(UserLanguage).to.be.ok;
             expect(UserLanguage._core).to.have.property('user_id');
-            expect(UserLanguage._core).to.have.property('language_id');
+            expect(UserLanguage._core).to.have.property('langs_id');
             done();
         });
 
@@ -124,12 +124,12 @@ describe('Associations', function () {
                 { name: 'spanish' },
                 { name: 'arabic' }
             ]).then(function(langs) {
-                    scope.langs = langs;
-                    var ul = [ ];
+                scope.langs = langs;
+                var ul = [ ];
                 for (var i = 0, len = scope.users.length; i < len; ++i) {
                         for (var j = 0, jlen = langs.length; j < jlen; ++j) {
                             if ((i + j) % 3 === 2) { continue; }
-                            ul.push({ user_id: scope.users[i].id, language_id: langs[j].id });
+                            ul.push({ user_id: scope.users[i].id, langs_id: langs[j].id });
                         }
                     }
                     return UserLanguage.save(ul);
