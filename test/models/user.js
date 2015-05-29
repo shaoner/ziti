@@ -11,7 +11,7 @@ var User = ziti.define('User', {
     address: Address,
     photos: [ Photo ],
     langs: ziti.Many(Language).through('UserLanguage'),
-    signup_date: ziti.Datetime().notNull().default(ziti.NOW)
+    signup_date: ziti.Datetime().notNull()
 });
 
 module.exports = User;
