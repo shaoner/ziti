@@ -2,6 +2,7 @@ var ziti = require('../../index');
 var Address = require('./address');
 var Photo = require('./photo');
 var Language = require('./language');
+var Friend = require('./friend');
 
 var User = ziti.define('User', {
     firstname: ziti.String().default(null),

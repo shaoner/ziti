@@ -9,6 +9,7 @@ var Photo = require('./models/photo');
 var Address = require('./models/address');
 var Phone = require('./models/phone');
 var Language = require('./models/language');
+var Friend = require('./models/friend');
 
 describe('Associations', function () {
 
@@ -129,14 +130,29 @@ describe('Associations', function () {
                 for (var i = 0, len = scope.users.length; i < len; ++i) {
                         for (var j = 0, jlen = langs.length; j < jlen; ++j) {
                             if ((i + j) % 3 === 2) { continue; }
-                            ul.push({ user_id: scope.users[i].id, langs_id: langs[j].id });
+                            ul.push({ user_id: scope.users[i].id, langs_id: langs[j].get('id') });
                         }
-                    }
-                    return UserLanguage.save(ul);
-                }).then(function (ul) {
-                    scope.userlangs = ul;
-                }).finally(done).catch(done);
+                }
+                return UserLanguage.save(ul);
+            }).then(function (ul) {
+                scope.userlangs = ul;
+            }).finally(done).catch(done);
         });
+
+        it('should insert ForeignKey Model targets', function (done) {
+            expect(Friend._pk).to.eql([ 'user_id', 'target_id' ]);
+            Friend.save([
+                { user_id: scope.users[0].id, target_id: scope.users[1].id },
+                { user_id: scope.users[1].id, target_id: scope.users[0].id },
+                { user_id: scope.users[0].id, target_id: scope.users[2].id },
+                { user_id: scope.users[2].id, target_id: scope.users[0].id },
+                { user_id: scope.users[1].id, target_id: scope.users[2].id },
+                { user_id: scope.users[2].id, target_id: scope.users[1].id }
+            ]).then(function (friends) {
+                expect(friends).to.be.an('array').and.to.have.length(6);
+            }).finally(done).catch(done);
+        });
+
     });
 
     describe('Model#at()', function () {
