@@ -5,6 +5,7 @@ var hooks = require('./hooks');
 
 var ModelInstance = require('../lib/model-instance');
 var Animal = require('./models/animal');
+var Book = require('./models/book');
 
 describe('Simple Model', function () {
 
@@ -197,4 +198,30 @@ describe('Simple Model', function () {
         });
     });
 
+    describe('Model#upsert()', function () {
+        it('should insert one Model data with two primary keys', function (done) {
+            Book.upsert({
+                title: 'La nuit des enfants rois',
+                author: 'Bernard Lenteric',
+                year: 1942
+            }).then(function (res) {
+                expect(res).to.have.property('affectedRows', 1);
+            }).finally(done).catch(done);
+        });
+
+        it('should update one Model data with two primary keys', function (done) {
+            Book.upsert({
+                title: 'La nuit des enfants rois',
+                author: 'Bernard Lenteric',
+                year: 1981
+            }).then(function (res) {
+                expect(res).to.have.property('affectedRows', 2);
+                return Book.all(null);
+            }).then(function (books) {
+                expect(books).to.be.an('array').and.to.have.length(1);
+                expect(books[0].get('year')).to.equals(1981);
+            }).finally(done).catch(done);
+        });
+
+    });
 });
