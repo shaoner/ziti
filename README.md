@@ -15,6 +15,18 @@ npm install ziti
 
 The complete documentation is available at [http://ziti.readthedocs.org](http://ziti.readthedocs.org/)
 
+Note that ziti is still in the alpha phase of the release life cycle. 
+A lot of fix/changes are made during this phase, some tests are added and the documentation changes fast as well.
+
+If you want to test it, please use the [devel branch](https://github.com/shaoner/ziti/tree/devel) instead of the current npm package and feel free to report any [issue](https://github.com/shaoner/ziti/issues).
+To use the devel branch, you can add this in your package.json:
+
+```json
+"dependencies": {
+    "ziti": "shaoner/ziti#devel"
+}
+```
+
 ## First steps
 
 ### Define your Models
