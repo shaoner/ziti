@@ -2,7 +2,7 @@
 
 It is possible to send raw queries to the server by using either:
 
-* [ziti.query](/api/ziti/#ziti+query)
+* [ziti.query](/api/ziti/#Db+query)
 * [Model.query](/api/model/#Model+query)
 
 ## Connections
@@ -19,7 +19,7 @@ ziti.withConnection(function (connection) {
     });
 });
 ```
-See [ziti.withConnection](/api/ziti/#ziti+withConnection)
+See [ziti.withConnection](/api/ziti/#Db+withConnection)
 
 ### Transactions
 
@@ -34,7 +34,7 @@ ziti.withTx(function (tx) {
 });
 ```
 
-See [ziti.withTx](/api/ziti/#ziti+withTx)
+See [ziti.withTx](/api/ziti/#Db+withTx)
 
 
 ## Expressions
