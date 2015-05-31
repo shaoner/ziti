@@ -17,6 +17,10 @@
   * [.remove(where, [options])](#Model+remove) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.at(where, [options])](#Model+at) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.all(where, [options])](#Model+all) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.sum(column, where, [options])](#Model+sum) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.min(column, where, [options])](#Model+min) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.max(column, where, [options])](#Model+max) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.count(where, [options])](#Model+count) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.build(data, [options])](#Model+build) ⇒ <code>[ModelInstance](/api/instance/)</code>
 
 <a name="Model+index"></a>
@@ -196,6 +200,57 @@ Retrieve a multiple Model instances
 | [options] | <code>Object</code> |  |
 | [options.attributes] | <code>Array.&lt;string&gt;</code> | The attributes to retrieve |
 | [options.$] | <code>string</code> | The scope to use |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+sum"></a>
+### model.sum(column, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Get the sum of the numeric values of the column
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| column | <code>string</code> | The numeric column |
+| where | <code>Object</code> | Query expression to filter rows. If not set or null, it gets the sum of all rows. |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+min"></a>
+### model.min(column, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Get the minimum numeric values of the column
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| column | <code>string</code> | The numeric column |
+| where | <code>Object</code> | Query expression to filter rows. If not set or null, it gets the minimum of all rows. |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+max"></a>
+### model.max(column, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Get the maximum numeric values of the column
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| column | <code>string</code> | The numeric column |
+| where | <code>Object</code> | Query expression to filter rows. If not set or null, it gets the maximum of all rows. |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+count"></a>
+### model.count(where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Count the number of rows
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| where | <code>Object</code> | Query expression to filter rows. If not set or null, it counts all rows. |
+| [options] | <code>Object</code> |  |
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+build"></a>

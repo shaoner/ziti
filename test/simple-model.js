@@ -6,6 +6,7 @@ var hooks = require('./hooks');
 var ModelInstance = require('../lib/model-instance');
 var Animal = require('./models/animal');
 var Book = require('./models/book');
+var Pasta = require('./models/pasta');
 
 describe('Simple Model', function () {
 
@@ -224,4 +225,43 @@ describe('Simple Model', function () {
         });
 
     });
+
+    describe('Model#sum(), Model#min(), Model#max(), Model#count()', function () {
+        before(function (done) {
+            Pasta.save([
+                { numero: 1, name: 'capellini' },
+                { numero: 3, name: 'spaghettini' },
+                { numero: 5, name: 'spaghetti' },
+                { numero: 7, name: 'spaghettoni' },
+                { name: 'fusilli' },
+                { name: 'penne' }
+            ]).finally(done).catch(done);
+        });
+
+        it('should get the sum of a column', function (done) {
+            Pasta.sum('numero').then(function (res) {
+                expect(res).to.equals(16);
+            }).finally(done).catch(done);
+        });
+
+        it('should get the min of a column', function (done) {
+            Pasta.min('numero').then(function (res) {
+                expect(res).to.equals(0);
+            }).finally(done).catch(done);
+        });
+
+        it('should get the max of a column', function (done) {
+            Pasta.max('numero').then(function (res) {
+                expect(res).to.equals(7);
+            }).finally(done).catch(done);
+        });
+
+        it('should get the number of rows', function (done) {
+            Pasta.count().then(function (res) {
+                expect(res).to.equals(6);
+            }).finally(done).catch(done);
+        });
+
+    });
+
 });
