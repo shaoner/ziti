@@ -23,7 +23,7 @@ var User = ziti.define('User', {
 module.exports = User;
 ```
 
-For more information about models, take a look at the [Model tutorial](/tutorial/model/)
+For more information about models, take a look at the [Model guide](/guide/model/)
 
 ### Setting up ziti
 
@@ -36,7 +36,7 @@ ziti.configure({
     debug: true,
 });
 ```
-For more information about ziti, take a look at the [ziti tutorial](/tutorial/ziti/)
+For more information about ziti, take a look at the [ziti guide](/guide/ziti/)
 
 ### Synchronizing
 

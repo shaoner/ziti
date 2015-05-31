@@ -2,10 +2,11 @@
 
  MySQL ORM for node.js
 
-[![npm](https://img.shields.io/npm/v/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
-[![Travis branch](https://img.shields.io/travis/shaoner/ziti/master.svg?style=flat-square)](https://travis-ci.org/shaoner/ziti)
-[![npm](https://img.shields.io/npm/l/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
-[![npm](https://img.shields.io/npm/dm/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
+[![npm](https://img.shields.io/npm/v/ziti.svg)](https://www.npmjs.com/package/ziti)
+[![Travis branch](https://img.shields.io/travis/shaoner/ziti/master.svg)](https://travis-ci.org/shaoner/ziti)
+[![npm](https://img.shields.io/npm/l/ziti.svg)](https://www.npmjs.com/package/ziti)
+[![npm](https://img.shields.io/npm/dm/ziti.svg)](https://www.npmjs.com/package/ziti)
+[![Documentation Status](https://readthedocs.org/projects/ziti/badge/?version=latest)](https://readthedocs.org/projects/ziti/?badge=latest)
 
 ## Installation
 
@@ -13,9 +14,7 @@
 npm install ziti
 ```
 
-The complete documentation is available at [http://ziti.readthedocs.org](http://ziti.readthedocs.org/)
-
-## First steps
+The complete documentation is available at [http://ziti.ewdl.org](http://ziti.ewdl.org/)
 
 ### Define your Models
 
@@ -34,8 +33,6 @@ var User = ziti.define('User', {
 module.exports = User;
 ```
 
-For more information about models, take a look at the [Model tutorial](/tutorial/model/)
-
 ### Setting up ziti
 
 ```javascript
@@ -47,7 +44,6 @@ ziti.configure({
     debug: true,
 });
 ```
-For more information about ziti, take a look at the [ziti tutorial](/tutorial/ziti/)
 
 ### Synchronizing
 
@@ -66,3 +62,5 @@ ziti.sync().then(function () {
     // The new user has been removed from database
 });
 ```
+
+For more information, you can read the [Guide](http://ziti.readthedocs.org/en/latest/tutorial/getting-started/)

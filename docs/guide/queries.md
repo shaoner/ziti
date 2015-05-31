@@ -39,10 +39,10 @@ See [ziti.withTx](/api/ziti/#ziti+withTx)
 
 ## Expressions
 
-In order to identify data, you have to use MySQL expressions.
+In order to work with MySQL expressions, you can use the provided query builder.
 With javascript, it may be more readable to build an expression.
 
-To do so, ziti defines convenient operators you can use with `findOne`, `findAll`, `update`, `remove`, etc.
+To do so, ziti defines convenient operators you can use with `at`, `all`, `remove`, `update`, etc.
 
 | ziti                             |  Alternative                     | MySQL                             |
 |----------------------------------|----------------------------------|-----------------------------------|

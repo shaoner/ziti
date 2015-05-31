@@ -135,3 +135,14 @@ With autoMigrate option set to true, the previous age column will be dropped and
 
 
 For now, it only works when adding or removing a column, not when changing its type.
+
+## Retrieving a model
+
+Because of cycle dependencies, you may want to get a model without calling require:
+
+```javascript
+var User = ziti.get('User');
+```
+
+Of course, this only works if User has already been defined so it's more convenient to use it inside an asynchroneous function.
+If the model is not found, it returns undefined.

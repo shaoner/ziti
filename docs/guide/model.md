@@ -13,6 +13,7 @@ var Animal = ziti.define('Animal', {
 
 module.exports = Animal;
 ```
+
 It will be mapped to a table `animal`
 
 | Field | Type         | Null | Key | Default | Extra          |
@@ -55,7 +56,7 @@ var Animal = ziti.define('Animal', {
 
 You can also prevent the creation of any primary key by setting `autoId` to `false`
 
-Finally, the primary key can be multiple fields:
+The primary key can be multiple fields:
 
 ```javascript
 var Animal = ziti.define('Animal', {
@@ -68,6 +69,15 @@ var Animal = ziti.define('Animal', {
 |-----------|--------------|------|-----|---------|----------------|
 | animal_id | int(11)      | NO   | PRI | NULL    | auto_increment |
 | type      | varchar(255) | NO   | PRI | NULL    |                |
+
+It also works with foreign keys:
+
+```javascript
+var AnimalRelationship = ziti.define('AnimalRelationship', {
+    animal: ziti.ForeignKey(Animal).primaryKey(),
+    owner: ziti.ForeignKey(User).primaryKey()
+});
+```
 
 ### Default field value
 
@@ -87,6 +97,8 @@ var Animal = ziti.define('Animal', {
 });
 ```
 
+Default values are set to model instances when not explicitly set.
+
 ## Inserting data
 
 To insert data into the model table, you can simply call [save](/api/model/#save) with your data:
@@ -104,11 +116,11 @@ It returns a promise fullfilled with an Animal instance or an array of Animal in
 
 ## Retrieving data
 
-When retrieving data, it always as a model instance.
+When retrieving data, it results model instances.
 
 ### at
 
-This retrieve only one result, so it returns a single model instance or null if not found:
+This retrieves only one result, so it returns a single model instance or null if not found:
 
 ```javascript
 Animal.at({ type: 'cat' }).then(function (animal) {
@@ -118,7 +130,7 @@ Animal.at({ type: 'cat' }).then(function (animal) {
 });
 ```
 
-For conveniency, you can simply do that to get raw data:
+For conveniency, you can simply use the [Promise#call](https://github.com/petkaantonov/bluebird/blob/master/API.md#callstring-propertyname--dynamic-arg---promise) method to have raw data instead of a model instance:
 
 ```javascript
 Animal.at({ type: 'cat' }).call('raw').then(function (animal) {
@@ -147,6 +159,8 @@ Animal.all({ id: { $lt: 10 } }).then(function (animals) {
 
 ## Updating data
 
+This updates rows with new values in the associated database table.
+
 ```javascript
 Animal.update({ type: 'horse' }, { $or: [ { type: 'dog' }, { type: 'cat' } ] })
    .then(function () {
@@ -157,11 +171,29 @@ Animal.update({ type: 'horse' }, { $or: [ { type: 'dog' }, { type: 'cat' } ] })
 
 ## Removing data
 
+This removes rows in the associated database table.
+
 ```javascript
 Animal.remove({ type: 'horse' }).then(function () {
     // DELETE FROM `Animal` USING `animal` `Animal` WHERE `Animal`.`type` = 'horse'
     console.log('Horses are all dead!');
 });
+```
+
+## Insert or update
+
+If you want to insert OR update existing rows by using a unique / primary key field, you can use the [Model#upsert()](/api/model/#Model+upsert)
+
+```javascript
+// Here the "type" field is supposed to be a primary key
+
+Animal.upsert({ type: 'squirrel', name: 'scrat' });
+// INSERT INTO `animal` SET `type`='squirrel', `name`='scrat' ON DUPLICATE VALUE UPDATE `type`='squirrel', name='scrat'
+// This adds a new squirrel named scrat
+
+Animal.upsert({ type: 'squirrel', name: 'alvin' });
+// INSERT INTO `animal` SET `type`='squirrel', `name`='alvin' ON DUPLICATE VALUE UPDATE `type`='squirrel', name='alvin'
+// This updates the name of the previous squirrel to alvin
 ```
 
 ## Building a model instance
@@ -175,13 +207,13 @@ dog.save().call('raw').then(function (dog) {
 });
 ```
 
-Take a look at [model instances](/tutorial/instance/) for more information.
+Take a look at [model instances](/guide/instance/) for more information.
 
 ## Custom methods
 
 ### Model methods
 
-If the method is global to all model, you can use `ziti.setStatic` as explained [here](/tutorial/ziti/#adding-global-methods-to-your-models-and-model-instances)
+If the method is global to all model, you can use `ziti.setStatic` as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
 
 If the method is for a specific model, you can use `setStatic` as well:
 
@@ -206,7 +238,7 @@ Animal.setStatic('at', function () {
 
 ### Model instance methods
 
-If the method is global to all model instances, you can use `ziti.setMethod` as explained [here](/tutorial/ziti/#adding-global-methods-to-your-models-and-model-instances)
+If the method is global to all model instances, you can use `ziti.setMethod` as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
 
 If the method is for a specific model instance, you can use `setMethod` as well:
 
