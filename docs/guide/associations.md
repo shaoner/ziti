@@ -165,7 +165,7 @@ Address.at({ street: 'jump street', numero: 22 }).then(function (address) {
 
 It can be convenient to retrieve a related model using custom options.
 
-### `on`
+### on
 
 You can specify which fields are used to associate models.
 For example, you may want to associate an Address to a User name rather than its id:
@@ -179,7 +179,7 @@ var User = ziti.define('User', {
 
 This tells that a user_name field will be added to the Address model related to the User name field.
 
-### `relatedName`
+### relatedName
 
 Since you can declare an explicit [ForeignKey](/api/types/#ForeignKey) when defining a model, it is necessary to identify it when refering the foreign key in another Model. For example:
 

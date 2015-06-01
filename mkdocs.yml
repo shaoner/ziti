@@ -1,20 +1,22 @@
 site_name: ziti - MySQL ORM for Node.js
 site_author: Alexandre Laurent
-site_favicon: favicon.png
+site_favicon: images/favicon.png
 repo_url: https://github.com/shaoner/ziti
 pages:
-- ['index.md', 'Home']
-- ['guide/getting-started.md', 'Guide', 'Getting started']
-- ['guide/ziti.md', 'Guide', 'Configuring ziti']
-- ['guide/model.md', 'Guide', 'Model']
-- ['guide/queries.md', 'Guide', 'Queries']
-- ['guide/associations.md', 'Guide', 'Associations']
-- ['guide/instance.md', 'Guide', 'Model instances']
-- ['api/ziti.md', 'API', 'ziti']
-- ['api/model.md', 'API', 'Model']
-- ['api/instance.md', 'API', 'Instance']
-- ['api/types.md', 'API', 'Types']
-- ['api/functions.md', 'API', 'Functions']
-- ['about.md', 'About']
-- ['todo.md', 'TODO']
+- Home: 'index.md'
+- Guide:
+  - Getting started: 'guide/getting-started.md'
+  - Using ziti: 'guide/ziti.md'
+  - Model: 'guide/model.md'
+  - Queries: 'guide/queries.md'
+  - Associations: 'guide/associations.md'
+  - Model instance: 'guide/instance.md'
+- API:
+  - ziti: 'api/ziti.md'
+  - Model: 'api/model.md'
+  - Instance: 'api/instance.md'
+  - Types: 'api/types.md'
+  - Functions: 'api/functions.md'
+- About: 'about.md'
 theme: readthedocs
+extra_css: [ 'style.css' ]

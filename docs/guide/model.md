@@ -2,7 +2,7 @@
 
 Usually models are defined into separate files, so you can import (using `require`) the ones you need.
 
-To define your model, you have to use `ziti.define`:
+To define your model, you have to use [ziti.define](/api/ziti/#Db+define):
 
 ```javascript
 var ziti = require('ziti');
@@ -81,7 +81,7 @@ var AnimalRelationship = ziti.define('AnimalRelationship', {
 
 ### Default field value
 
-You can speficy a default value for a field by setting the `default` option.
+You can speficy a default value for a field by setting the [default](/api/types/#AbstractType+default) option.
 
 ```javascript
 var Animal = ziti.define('Animal', {
@@ -213,9 +213,9 @@ Take a look at [model instances](/guide/instance/) for more information.
 
 ### Model methods
 
-If the method is global to all model, you can use `ziti.setStatic` as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
+If the method is global to all model, you can use [ziti.setStatic](/api/ziti/#dbsetstaticname-fn) as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
 
-If the method is for a specific model, you can use `setStatic` as well:
+If the method is for a specific model, you can use [Model.setStatic](/api/model/#Model+setStatic) as well:
 
 ```javascript
 Animal.setStatic('getDogs', function () {
@@ -238,9 +238,9 @@ Animal.setStatic('at', function () {
 
 ### Model instance methods
 
-If the method is global to all model instances, you can use `ziti.setMethod` as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
+If the method is global to all model instances, you can use [ziti.setMethod](/api/ziti/#Db+setMethod) as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
 
-If the method is for a specific model instance, you can use `setMethod` as well:
+If the method is for a specific model instance, you can use [Model.setMethod](/api/model/#Model+setMethod) as well:
 
 ```javascript
 Animal.setMethod('sayHello', function () {

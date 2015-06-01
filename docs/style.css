@@ -1,0 +1,19 @@
+.wy-side-nav-search {
+    background-color: #2a467e;
+}
+
+code {
+    font-size: 90%;
+    color: #f36e4b;
+    font-weight: bold;
+}
+
+code.javascript {
+    background-color: #3c3c3c;
+    color: #fff;
+    font-weight: normal;
+}
+
+code.javascript > .hljs-keyword {
+    color: #ddd;
+}

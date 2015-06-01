@@ -5,14 +5,7 @@
 * [Model](#Model)
   * [.table](#Model+table)
   * [.name](#Model+name)
-  * [.index(fields, [options])](#Model+index)
-  * [.setStatic(name, fn)](#Model+setStatic)
-  * [.setMethod(name, fn)](#Model+setMethod)
-  * [.query(query, [options])](#Model+query) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.sync([options])](#Model+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.createTable([options])](#Model+createTable) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.dropTable([options])](#Model+dropTable) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.migrate([options])](#Model+migrate) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.build(data, [options])](#Model+build) ⇒ <code>[ModelInstance](/api/instance/)</code>
   * [.save(data, [options])](#Model+save) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.update(data, where, [options])](#Model+update) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.upsert(data, [options])](#Model+upsert)
@@ -23,7 +16,14 @@
   * [.min(column, where, [options])](#Model+min) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.max(column, where, [options])](#Model+max) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.count(where, [options])](#Model+count) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.build(data, [options])](#Model+build) ⇒ <code>[ModelInstance](/api/instance/)</code>
+  * [.index(fields, [options])](#Model+index)
+  * [.setStatic(name, fn)](#Model+setStatic)
+  * [.setMethod(name, fn)](#Model+setMethod)
+  * [.query(query, [options])](#Model+query) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.sync([options])](#Model+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.createTable([options])](#Model+createTable) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.dropTable([options])](#Model+dropTable) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.migrate([options])](#Model+migrate) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
 
 <a name="Model+table"></a>
 ### model.table
@@ -35,105 +35,17 @@ The associated table name
 The model name
 
 **Kind**: instance property of <code>[Model](#Model)</code>  
-<a name="Model+index"></a>
-### model.index(fields, [options])
-Add a new index on some fields
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fields | <code>Array.&lt;string&gt;</code> | Name of the fields |
-| [options] | <code>Object</code> |  |
-| [options.name] | <code>string</code> | name of the index, by default it is set to the concatenated fields with a '_' |
-| [options.using] | <code>string</code> | method for the index ('hash', 'btree') |
-| [options.unique] | <code>boolean</code> | unique index |
-| [options.fulltext] | <code>boolean</code> | fulltext index |
-| [options.spacial] | <code>boolean</code> | spacial index |
-
-<a name="Model+setStatic"></a>
-### model.setStatic(name, fn)
-Set a new Model method
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the method |
-| fn | <code>function</code> | The method |
-
-<a name="Model+setMethod"></a>
-### model.setMethod(name, fn)
-Set a new Model Instance method
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the method |
-| fn | <code>function</code> | The method |
-
-<a name="Model+query"></a>
-### model.query(query, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-Send a SQL query
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| query | <code>Object</code> &#124; <code>string</code> | The query |
-| query.sql | <code>string</code> | A query with parameters defined as ? |
-| query.values | <code>Array.&lt;\*&gt;</code> | An array of values to pass |
-| [options] | <code>Object</code> |  |
-| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
-
-<a name="Model+sync"></a>
-### model.sync([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-Synchronize the Model with the database
+<a name="Model+build"></a>
+### model.build(data, [options]) ⇒ <code>[ModelInstance](/api/instance/)</code>
+Build a Model instance
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
+| data | <code>Object</code> |  | The data to use to build the instance |
 | [options] | <code>Object</code> |  |  |
-| [options.dropTable] | <code>boolean</code> | <code>false</code> | Drop the table |
-| [options.createTable] | <code>boolean</code> | <code>true</code> | Create the table |
-| [options.autoMigrate.addColumns] | <code>boolean</code> | <code>true</code> | Add missing table columns |
-| [options.autoMigrate.delColumns] | <code>boolean</code> | <code>false</code> | Remove missing table columns |
-| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> |  | Use this connection |
-
-<a name="Model+createTable"></a>
-### model.createTable([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-Create the associated table if not exists
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [options] | <code>Object</code> |  |
-| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
-
-<a name="Model+dropTable"></a>
-### model.dropTable([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-Delete the associated table if exists
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [options] | <code>Object</code> |  |
-| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
-
-<a name="Model+migrate"></a>
-### model.migrate([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-Add/remove columns from the table to match the current Model
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [options] | <code>Object</code> |  |
-| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+| [options.new] | <code>boolean</code> | <code>true</code> | Whether the instance is new or already existing |
 
 <a name="Model+save"></a>
 ### model.save(data, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -265,15 +177,103 @@ Count the number of rows
 | [options] | <code>Object</code> |  |
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
-<a name="Model+build"></a>
-### model.build(data, [options]) ⇒ <code>[ModelInstance](/api/instance/)</code>
-Build a Model instance
+<a name="Model+index"></a>
+### model.index(fields, [options])
+Add a new index on some fields
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fields | <code>Array.&lt;string&gt;</code> | Name of the fields |
+| [options] | <code>Object</code> |  |
+| [options.name] | <code>string</code> | name of the index, by default it is set to the concatenated fields with a '_' |
+| [options.using] | <code>string</code> | method for the index ('hash', 'btree') |
+| [options.unique] | <code>boolean</code> | unique index |
+| [options.fulltext] | <code>boolean</code> | fulltext index |
+| [options.spacial] | <code>boolean</code> | spacial index |
+
+<a name="Model+setStatic"></a>
+### model.setStatic(name, fn)
+Set a new Model method
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the method |
+| fn | <code>function</code> | The method |
+
+<a name="Model+setMethod"></a>
+### model.setMethod(name, fn)
+Set a new Model Instance method
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the method |
+| fn | <code>function</code> | The method |
+
+<a name="Model+query"></a>
+### model.query(query, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Send a SQL query
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| query | <code>Object</code> &#124; <code>string</code> | The query |
+| query.sql | <code>string</code> | A query with parameters defined as ? |
+| query.values | <code>Array.&lt;\*&gt;</code> | An array of values to pass |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+sync"></a>
+### model.sync([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Synchronize the Model with the database
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| data | <code>Object</code> |  | The data to use to build the instance |
 | [options] | <code>Object</code> |  |  |
-| [options.new] | <code>boolean</code> | <code>true</code> | Whether the instance is new or already existing |
+| [options.dropTable] | <code>boolean</code> | <code>false</code> | Drop the table |
+| [options.createTable] | <code>boolean</code> | <code>true</code> | Create the table |
+| [options.autoMigrate.addColumns] | <code>boolean</code> | <code>true</code> | Add missing table columns |
+| [options.autoMigrate.delColumns] | <code>boolean</code> | <code>false</code> | Remove missing table columns |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> |  | Use this connection |
+
+<a name="Model+createTable"></a>
+### model.createTable([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Create the associated table if not exists
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+dropTable"></a>
+### model.dropTable([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Delete the associated table if exists
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
+
+<a name="Model+migrate"></a>
+### model.migrate([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Add/remove columns from the table to match the current Model
+
+**Kind**: instance method of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [options] | <code>Object</code> |  |
+| [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 

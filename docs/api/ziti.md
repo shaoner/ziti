@@ -24,19 +24,20 @@
 * [Db](#Db)
   * [.configure([config])](#Db+configure)
   * [.sync([options])](#Db+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.define(name, core, [options])](#Db+define) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.get(name)](#Db+get) ⇒ <code>[Model](/api/model)</code>
   * [.end()](#Db+end) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.withConnection(fn)](#Db+withConnection) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.withTx(fn)](#Db+withTx) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.query(query, [options])](#Db+query) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.define(name, core, [options])](#Db+define) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.setStatic(name, fn)](#Db+setStatic)
   * [.setMethod(name, fn)](#Db+setMethod)
-  * [.get(name)](#Db+get) ⇒ <code>Model</code>
   * [.create([config])](#Db+create) ⇒ <code>[Db](#Db)</code>
 
 <a name="Db+configure"></a>
 ### db.configure([config])
-Configure the mysql handler by creating the connection pool
+Configure the mysql handler by creating the connection pool.
+Of course you cannot query the database if ziti is not configured.
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
 **See**: [Node MySQL connection options](https://github.com/felixge/node-mysql#connection-options)  
@@ -50,6 +51,20 @@ Configure the mysql handler by creating the connection pool
 | [config.password] | <code>string</code> |  | The password of that MySQL user |
 | [config.database] | <code>string</code> |  | The database to use for the connection |
 
+**Example**  
+```js
+var ziti = require('ziti');
+// You can define models before configuring ziti
+var User = ziti.define('User', {
+    name: ziti.String,
+    photos: [ 'Photo' ]
+});
+ziti.configure({ host: 'localhost', user: 'root', database: 'test' });
+// Or after
+var Photo = ziti.define('Photo', {
+    path: ziti.String().unique()
+});
+```
 <a name="Db+sync"></a>
 ### db.sync([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
 Synchronizes models with the database
@@ -64,6 +79,53 @@ Synchronizes models with the database
 | [options.createTable] | <code>boolean</code> | <code>true</code> | Create all model tables |
 | [options.autoMigrate.addColumns] | <code>boolean</code> | <code>true</code> | Add missing table columns |
 | [options.autoMigrate.delColumns] | <code>boolean</code> | <code>false</code> | Remove missing table columns |
+
+**Example**  
+```js
+ziti.sync({ dropTable: true, createTable: true, autoMigrate: false })
+   .then(function (models) {
+       models.forEach(function (modelName) {
+           console.log('* %s Model has been synchronized', modelName);
+       });
+   });
+// * User Model has been synchronized
+// * Photo Model has been synchronized
+```
+<a name="Db+define"></a>
+### db.define(name, core, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Create a new Model
+
+**Kind**: instance method of <code>[Db](#Db)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| name | <code>string</code> |  | The name of the model |
+| core | <code>Object</code> |  | core of the model in the form { fieldName: fieldType } |
+| [options] | <code>Object</code> |  |  |
+| [options.createTable] | <code>boolean</code> | <code>true</code> | Create the table during synchronization |
+| [options.tableName] | <code>string</code> |  | Name of the table, by default the name of the model in [snakeCase](https://lodash.com/docs#snakeCase) |
+| [options.engine] | <code>string</code> | <code>&quot;InnoDB&quot;</code> | Engine to use when creating the table |
+| [options.autoId] | <code>string</code> &#124; <code>boolean</code> | <code>true</code> | Create a primary key auto increment 'id' pr using the provided field name |
+
+**Example**  
+```js
+var User = ziti.define('User', {
+   email: ziti.String().unique().notNull(),
+   password: ziti.Varbinary(16).notNull(),
+   age: ziti.Int,
+   fullname: ziti.String,
+   photos: [ Photo ]
+}, { autoId: 'user_id', engine: 'InnoDb', tableName: 'user' });
+```
+<a name="Db+get"></a>
+### db.get(name) ⇒ <code>[Model](/api/model)</code>
+Get a Model from its name
+
+**Kind**: instance method of <code>[Db](#Db)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the model |
 
 <a name="Db+end"></a>
 ### db.end() ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -93,7 +155,7 @@ If something goes wrong in the callback (exception or a promise rejected), it ro
 | fn | <code>function</code> | The callback |
 
 **Example**  
-```javascript
+```js
 ziti.withTx(function (tx) {
   return ziti.query('INSERT INTO Animal SET `type` = \'cat\'', { using: tx })
     .then(function () {
@@ -123,28 +185,16 @@ Send a SQL query
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 **Example**  
-```javascript
+```js
 ziti.query({ sql: 'SELECT ?? FROM ?? WHERE ?? = ?', values: [ 'id', 'user', 'id', 42 ] });
 // SELECT `id` FROM `user` WHERE `id` = 42
-ziti.query({ sql: 'INSERT INTO ?? SET ??', values: [ 'user', { name: 'Heisenberg', age: 42 } ] });
+
+ziti.query({ sql: 'INSERT INTO ?? SET ?', values: [ 'user', { name: 'Heisenberg', age: 42 } ] });
 // INSERT INTO `user` SET `name` = 'Heisenberg', `age` = 42
+
+ziti.query('SELECT id FROM `user` WHERE `id` = 42');
+// SELECT `id` FROM `user` WHERE `id` = 42
 ```
-<a name="Db+define"></a>
-### db.define(name, core, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-Create a new Model
-
-**Kind**: instance method of <code>[Db](#Db)</code>  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| name | <code>string</code> |  | The name of the model |
-| core | <code>Object</code> |  | core of the model in the form { fieldName: fieldType } |
-| [options] | <code>Object</code> |  |  |
-| [options.createTable] | <code>boolean</code> | <code>true</code> | Create the table during synchronization |
-| [options.tableName] | <code>string</code> |  | Name of the table, by default the name of the model in [snakeCase](https://lodash.com/docs#snakeCase) |
-| [options.engine] | <code>string</code> | <code>&quot;InnoDB&quot;</code> | Engine to use when creating the table |
-| [options.autoId] | <code>string</code> &#124; <code>boolean</code> | <code>true</code> | Create a primary key auto increment 'id' pr using the provided field name |
-
 <a name="Db+setStatic"></a>
 ### db.setStatic(name, fn)
 Add a static method global to all models
@@ -167,16 +217,6 @@ Add a method global to all model instances
 | name | <code>string</code> | Name of the method |
 | fn | <code>function</code> | The method |
 
-<a name="Db+get"></a>
-### db.get(name) ⇒ <code>Model</code>
-Get a Model from its name
-
-**Kind**: instance method of <code>[Db](#Db)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the model |
-
 <a name="Db+create"></a>
 ### db.create([config]) ⇒ <code>[Db](#Db)</code>
 Create a new connection.
@@ -195,6 +235,13 @@ This is helpful when dealing with multiple databases.<br>
 | [config.password] | <code>string</code> |  | The password of that MySQL user |
 | [config.database] | <code>string</code> |  | The database to use for the connection |
 
+**Example**  
+```js
+var db = ziti.create({ host: 'localhost', user: 'root', database: 'test' });
+var User = db.define('User', {
+    name: ziti.String
+});
+```
 <a name="ziti"></a>
 ## ziti : <code>[Db](#Db)</code>
 **Kind**: global variable  

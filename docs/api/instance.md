@@ -4,7 +4,7 @@
 
 * [Instance](#Instance)
   * [.raw()](#Instance+raw) ⇒ <code>Object</code>
-  * [.getValue(name)](#Instance+getValue) ⇒ <code>string</code> &#124; <code>Number</code>
+  * [.getValue(name)](#Instance+getValue) ⇒ <code>\*</code>
   * [.setValue(name, value)](#Instance+setValue)
   * [.get([name])](#Instance+get)
   * [.set(name, [value])](#Instance+set)
@@ -19,7 +19,7 @@ Give the data relative to the instance in an object of the form { fieldName: val
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  
 <a name="Instance+getValue"></a>
-### instance.getValue(name) ⇒ <code>string</code> &#124; <code>Number</code>
+### instance.getValue(name) ⇒ <code>\*</code>
 Get the raw value of a field
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  

@@ -63,4 +63,4 @@ ziti.sync().then(function () {
 });
 ```
 
-For more information, you can read the [Guide](http://ziti.readthedocs.org/en/latest/tutorial/getting-started/)
+For more information, you can read the [Guide](http://ziti.ewdl.org/en/latest/tutorial/getting-started/)

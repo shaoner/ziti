@@ -42,7 +42,9 @@ See [ziti.withTx](/api/ziti/#Db+withTx)
 In order to work with MySQL expressions, you can use the provided query builder.
 With javascript, it may be more readable to build an expression.
 
-To do so, ziti defines convenient operators you can use with `at`, `all`, `remove`, `update`, etc.
+To do so, ziti defines convenient operators you can use with [at](/api/model/#Model+at), [all](/api/model/#Model+all), [remove](/api/model/#Model+remove), [update](/api/model/#Model+update), etc.
+
+### Where
 
 | ziti                             |  Alternative                     | MySQL                             |
 |----------------------------------|----------------------------------|-----------------------------------|
@@ -72,3 +74,15 @@ You can also use operators to combine expressions:
 | `$or: [ { id: 1 }, { id: 2 } ]`                   | ``WHERE `id` = 1 OR `id` = 2``            |
 | `$and: [ { name: 'alex' }, { age: { $ge: 18 } }]` | ``WHERE `name` = 'alex' AND `age` >= 18`` |
 | `$xor: [ { id: 1 }, { age: 42 } ]`                | ``WHERE `id` = 1 XOR `age` = 42``         |
+
+### MySQL functions
+
+| ziti | MySQL |
+| ---- | ----- |
+| `{ id: ziti.$inc }` | ``SET `id` = `id` + 1``
+| `{ id: ziti.$inc('id') }` | ``SET `id` = `id` + 1``
+| `{ id: ziti.$inc('id', 2) }` | ``SET `id` = `id` + 2``
+| `{ id: ziti.$inc(ziti.$dec('id', 2), 5) }` | ``SET `id` = `id` - 2 + 5``
+| `{ id: [ '?? + ?', 'id', 42 ] }` | ``SET `id` = `id` + 42``
+
+For more information, take a look at [the complete list of functions](/api/functions/)
