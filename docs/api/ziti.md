@@ -5,8 +5,17 @@
 </dl>
 ## Members
 <dl>
-<dt><a href="#ziti">ziti</a></dt>
+<dt><a href="#ziti">ziti</a> : <code><a href="#Db">Db</a></code></dt>
 <dd></dd>
+</dl>
+## External
+<dl>
+<dt><a href="#external_Types">Types</a></dt>
+<dd><p>SQL types</p>
+</dd>
+<dt><a href="#external_Functions">Functions</a></dt>
+<dd><p>SQL Functions</p>
+</dd>
 </dl>
 <a name="Db"></a>
 ## Db
@@ -187,5 +196,18 @@ This is helpful when dealing with multiple databases.<br>
 | [config.database] | <code>string</code> |  | The database to use for the connection |
 
 <a name="ziti"></a>
-## ziti
+## ziti : <code>[Db](#Db)</code>
 **Kind**: global variable  
+**Mixes**: <code>[Types](#external_Types)</code>, <code>[Functions](#external_Functions)</code>  
+<a name="external_Types"></a>
+## Types
+SQL types
+
+**Kind**: global external  
+**See**: [Types](/api/types/)  
+<a name="external_Functions"></a>
+## Functions
+SQL Functions
+
+**Kind**: global external  
+**See**: [Functions](/api/functions/)  

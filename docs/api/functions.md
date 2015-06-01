@@ -1,8 +1,8 @@
 <a name="Functions"></a>
-## Functions : <code>object</code>
-**Kind**: global namespace  
+## Functions
+**Kind**: global mixin  
 
-* [Functions](#Functions) : <code>object</code>
+* [Functions](#Functions)
   * [.$inc(column, [value])](#Functions.$inc)
   * [.$dec(column, [value])](#Functions.$dec)
   * [.$div(column, [value])](#Functions.$div)
