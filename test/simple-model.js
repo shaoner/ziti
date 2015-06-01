@@ -15,6 +15,20 @@ describe('Simple Model', function () {
 
     var scope = { };
 
+    describe('Model#table', function() {
+        it('should get the model table name', function (done) {
+            expect(Book.table).to.equals('book');
+            done();
+        })
+    });
+
+    describe('Model#name', function() {
+        it('should get the model name', function (done) {
+            expect(Animal.name).to.equals('Animal');
+            done();
+        })
+    });
+
     describe('Model#save()', function() {
         it('should insert one Model data', function (done) {
             Animal.save({

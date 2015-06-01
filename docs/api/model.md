@@ -3,6 +3,8 @@
 **Kind**: global class  
 
 * [Model](#Model)
+  * [.table](#Model+table)
+  * [.name](#Model+name)
   * [.index(fields, [options])](#Model+index)
   * [.setStatic(name, fn)](#Model+setStatic)
   * [.setMethod(name, fn)](#Model+setMethod)
@@ -23,6 +25,16 @@
   * [.count(where, [options])](#Model+count) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.build(data, [options])](#Model+build) ⇒ <code>[ModelInstance](/api/instance/)</code>
 
+<a name="Model+table"></a>
+### model.table
+The associated table name
+
+**Kind**: instance property of <code>[Model](#Model)</code>  
+<a name="Model+name"></a>
+### model.name
+The model name
+
+**Kind**: instance property of <code>[Model](#Model)</code>  
 <a name="Model+index"></a>
 ### model.index(fields, [options])
 Add a new index on some fields
