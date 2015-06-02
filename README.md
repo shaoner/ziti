@@ -7,6 +7,7 @@
 [![npm](https://img.shields.io/npm/l/ziti.svg)](https://www.npmjs.com/package/ziti)
 [![npm](https://img.shields.io/npm/dm/ziti.svg)](https://www.npmjs.com/package/ziti)
 [![Documentation Status](https://readthedocs.org/projects/ziti/badge/?version=latest)](https://readthedocs.org/projects/ziti/?badge=latest)
+[![Dependency Status](https://david-dm.org/shaoner/ziti.svg)](https://david-dm.org/shaoner/ziti)
 
 ## Installation
 
