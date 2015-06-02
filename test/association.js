@@ -162,8 +162,11 @@ describe('Associations', function () {
                     var raw = user.raw();
                     expect(raw).to.have.property('firstname', 'dexter');
                     expect(raw).to.have.property('address');
+                    expect(raw.address.street).to.equals('jump street');
                     expect(raw).to.have.property('photos');
+                    expect(raw.photos[0].path).to.equals('am.jpg');
                     expect(raw).to.have.property('langs');
+                    expect(raw.langs[0].name).to.equals('english');
                 }).finally(done).catch(done);
         });
 
