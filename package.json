@@ -29,9 +29,9 @@
   },
   "homepage": "https://github.com/shaoner/ziti",
   "dependencies": {
-    "bluebird": "^2.9.25",
-    "lodash": "^3.9.1",
-    "mysql": "^2.6.2"
+    "bluebird": "~2.9.27",
+    "lodash": "~3.9.3",
+    "mysql": "~2.7.0"
   },
   "devDependencies": {
     "chai": "^2.3.0",
