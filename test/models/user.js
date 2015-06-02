@@ -5,8 +5,8 @@ var Language = require('./language');
 var Friend = require('./friend');
 
 var User = ziti.define('User', {
-    firstname: ziti.String().default(null),
-    lastname: ziti.String().default(null),
+    firstname: ziti.String().default(null).unique('name'),
+    lastname: ziti.String().default(null).unique('name'),
     nickname: ziti.String().unique().notNull(),
     age: ziti.Int().default(18),
     address: Address,

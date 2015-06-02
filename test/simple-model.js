@@ -7,6 +7,7 @@ var ModelInstance = require('../lib/model-instance');
 var Animal = require('./models/animal');
 var Book = require('./models/book');
 var Pasta = require('./models/pasta');
+var User = require('./models/user');
 
 describe('Simple Model', function () {
 
@@ -14,6 +15,39 @@ describe('Simple Model', function () {
     after(hooks.clean);
 
     var scope = { };
+
+    describe('Model structure', function () {
+        before(function (done) {
+            User.query({ sql: 'SHOW INDEX FROM ??', values: [ User.table ] })
+                .get(0)
+                .then(function (res) {
+                    scope.userStructure = _.groupBy(res, 'Key_name');
+                }).finally(done).catch(done);
+        });
+
+        it('should check the primary key', function (done) {
+            var keynames = scope.userStructure;
+            expect(keynames.PRIMARY).to.be.an('array').and.to.have.length(1);
+            expect(keynames.PRIMARY[0].Column_name).to.equals('id');
+            done();
+        });
+
+        it('should check a unique key with one field', function (done) {
+            var keynames = scope.userStructure;
+            expect(keynames.nickname).to.be.an('array').and.to.have.length(1);
+            expect(keynames.nickname[0].Column_name).to.equals('nickname');
+            done();
+        });
+
+        it('should check a unique key with two fields', function (done) {
+            var keynames = scope.userStructure;
+            expect(keynames.uq_name).to.be.an('array').and.to.have.length(2);
+            expect(keynames.uq_name[0].Column_name).to.equals('firstname');
+            expect(keynames.uq_name[1].Column_name).to.equals('lastname');
+            done();
+        });
+
+    });
 
     describe('Model#table', function() {
         it('should get the model table name', function (done) {
