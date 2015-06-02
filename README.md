@@ -64,3 +64,13 @@ ziti.sync().then(function () {
 ```
 
 For more information, you can read the [Guide](http://ziti.ewdl.org/en/latest/tutorial/getting-started/)
+
+## Tests
+
+To run tests on ziti, first take a look at the [config](/test/config.js) to use your own test server
+
+Then, just run:
+
+```
+npm test
+```
