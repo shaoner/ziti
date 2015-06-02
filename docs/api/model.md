@@ -231,12 +231,26 @@ Send a SQL query
 
 | Param | Type | Description |
 | --- | --- | --- |
-| query | <code>Object</code> &#124; <code>string</code> | The query |
+| query | <code>Array.&lt;\*&gt;</code> &#124; <code>Object</code> &#124; <code>string</code> | The query |
 | query.sql | <code>string</code> | A query with parameters defined as ? |
 | query.values | <code>Array.&lt;\*&gt;</code> | An array of values to pass |
 | [options] | <code>Object</code> |  |
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
+**Example**  
+```js
+User.query({ sql: 'SELECT ?? FROM ?? WHERE ?? = ?', values: [ 'id', User.table, 'id', 42 ] });
+// SELECT `id` FROM `user` WHERE `id` = 42
+
+User.query({ sql: 'INSERT INTO ?? SET ?', values: [ User.table, { name: 'Heisenberg', age: 42 } ] });
+// INSERT INTO `user` SET `name` = 'Heisenberg', `age` = 42
+
+User.query('SELECT id FROM `user` WHERE `id` = 42');
+// SELECT `id` FROM `user` WHERE `id` = 42
+
+User.query([ 'SELECT ?? FROM ?? WHERE ?? = ?', 'id', User.table, 'id', 42 ]);
+// SELECT `id` FROM `user` WHERE `id` = 42
+```
 <a name="Model+sync"></a>
 ### model.sync([options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
 Synchronize the Model with the database

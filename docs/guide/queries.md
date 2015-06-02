@@ -5,6 +5,16 @@ It is possible to send raw queries to the server by using either:
 * [ziti.query](/api/ziti/#Db+query)
 * [Model.query](/api/model/#Model+query)
 
+Example:
+
+```javascript
+ziti.query([ 'SELECT ?? FROM ?? WHERE ?? > ?', [ 'id', 'name' ], 'user', 'id', 42 ])
+   .spread(function (result) {
+      // result is an array of plain objects that looks like:
+      // [ { id: 43, name: 'Heisenberg' }, { id: 44, name: 'Hannibal' }, ... ]
+   });
+```
+
 ## Connections
 
 ### Pool connection

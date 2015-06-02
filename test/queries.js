@@ -37,6 +37,16 @@ describe('Queries', function () {
                 }).finally(done).catch(done);
         });
 
+        it('should do a query with escaped values using ziti (2nd form)', function (done) {
+            ziti.query([ 'SELECT ?? FROM ?? WHERE ?? > ?', [ 'kind', 'name' ],
+                         'animal', 'age', 10 ])
+                .spread(function (result) {
+                    expect(result).to.be.an('array').and.to.have.length(1);
+                    expect(result[0]).to.have.property('kind');
+                    expect(result[0]).to.have.property('name');
+                }).finally(done).catch(done);
+        });
+
         it('should do a select using Model', function (done) {
             Animal.query('SELECT `kind`, `name` FROM `animal`')
                 .spread(function(result) {
@@ -51,6 +61,16 @@ describe('Queries', function () {
         it('should do a query with escaped values using Model', function (done) {
             Animal.query({ sql: 'SELECT ?? FROM ?? WHERE ?? > ?',
                          values: [ [ 'kind', 'name' ], Animal.table, 'age', 10 ] })
+                .spread(function (result) {
+                    expect(result).to.be.an('array').and.to.have.length(1);
+                    expect(result[0]).to.have.property('kind');
+                    expect(result[0]).to.have.property('name');
+                }).finally(done).catch(done);
+        });
+
+        it('should do a query with escaped values using Model (2nd form)', function (done) {
+            Animal.query([ 'SELECT ?? FROM ?? WHERE ?? > ?', [ 'kind', 'name' ],
+                           Animal.table, 'age', 10 ])
                 .spread(function (result) {
                     expect(result).to.be.an('array').and.to.have.length(1);
                     expect(result[0]).to.have.property('kind');

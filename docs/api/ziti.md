@@ -216,7 +216,7 @@ Send a SQL query
 
 | Param | Type | Description |
 | --- | --- | --- |
-| query | <code>Object</code> &#124; <code>string</code> | The query |
+| query | <code>Array.&lt;\*&gt;</code> &#124; <code>Object</code> &#124; <code>string</code> | The query |
 | query.sql | <code>string</code> | A query with parameters defined as ? |
 | query.values | <code>Array.&lt;\*&gt;</code> | An array of values to pass |
 | [options] | <code>Object</code> |  |
@@ -231,6 +231,9 @@ ziti.query({ sql: 'INSERT INTO ?? SET ?', values: [ 'user', { name: 'Heisenberg'
 // INSERT INTO `user` SET `name` = 'Heisenberg', `age` = 42
 
 ziti.query('SELECT id FROM `user` WHERE `id` = 42');
+// SELECT `id` FROM `user` WHERE `id` = 42
+
+ziti.query([ 'SELECT ?? FROM ?? WHERE ?? = ?', 'id', 'user', 'id', 42 ]);
 // SELECT `id` FROM `user` WHERE `id` = 42
 ```
 <a name="Db+create"></a>
