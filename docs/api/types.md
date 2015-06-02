@@ -28,7 +28,7 @@
 
 * [AbstractType](#AbstractType)
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -42,10 +42,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[AbstractType](#AbstractType)</code>  
 <a name="AbstractType+unique"></a>
-### abstractType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### abstractType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[AbstractType](#AbstractType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### abstractType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -104,7 +109,7 @@ Add this field to a scope or multiple scopes
 
 * [BaseType](#BaseType) ⇐ <code>[AbstractType](#AbstractType)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -118,10 +123,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[BaseType](#BaseType)</code>  
 <a name="AbstractType+unique"></a>
-### baseType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### baseType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[BaseType](#BaseType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### baseType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -183,7 +193,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -226,10 +236,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[ForeignKey](#ForeignKey)</code>  
 <a name="AbstractType+unique"></a>
-### foreignKey.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### foreignKey.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[ForeignKey](#ForeignKey)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### foreignKey.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -293,7 +308,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -358,10 +373,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[Many](#Many)</code>  
 <a name="AbstractType+unique"></a>
-### many.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### many.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[Many](#Many)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### many.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -422,7 +442,7 @@ Add this field to a scope or multiple scopes
   * [.zerofill()](#NumericType+zerofill) ⇒ <code>[NumericType](#NumericType)</code>
   * [.unsigned()](#NumericType+unsigned) ⇒ <code>[NumericType](#NumericType)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -446,10 +466,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[NumericType](#NumericType)</code>  
 <a name="AbstractType+unique"></a>
-### numericType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### numericType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[NumericType](#NumericType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### numericType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -512,7 +537,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -567,10 +592,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[One](#One)</code>  
 <a name="AbstractType+unique"></a>
-### one.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### one.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[One](#One)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### one.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -631,7 +661,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -665,10 +695,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[Reference](#Reference)</code>  
 <a name="AbstractType+unique"></a>
-### reference.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### reference.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[Reference](#Reference)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### reference.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -729,7 +764,7 @@ Add this field to a scope or multiple scopes
   * [.charset()](#StringType+charset) ⇒ <code>[StringType](#StringType)</code>
   * [.collate()](#StringType+collate) ⇒ <code>[StringType](#StringType)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -753,10 +788,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[StringType](#StringType)</code>  
 <a name="AbstractType+unique"></a>
-### stringType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### stringType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[StringType](#StringType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### stringType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
