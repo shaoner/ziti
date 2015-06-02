@@ -19,17 +19,17 @@ describe('Associations', function () {
     var scope = { };
 
     describe('Model', function() {
-        it('Address should have a user_id', function (done) {
+        it('A One referenced model has the correct foreign key', function (done) {
             expect(Address._core).to.have.property('user_id');
             done();
         });
 
-        it('Photo should have a user_id', function (done) {
+        it('A Many referenced model has the correct foreign key', function (done) {
             expect(Photo._core).to.have.property('user_id');
             done();
         });
 
-        it('UserLanguage model should exists and have a user_id and a language_id', function (done) {
+        it('A Many to many referenced model should exists and have a both foreign keys', function (done) {
             var UserLanguage = ziti.get('UserLanguage');
             expect(UserLanguage).to.be.ok;
             expect(UserLanguage._core).to.have.property('user_id');
@@ -39,7 +39,7 @@ describe('Associations', function () {
 
     });
 
-    describe('Model#save()', function () {
+    describe('#save()', function () {
         it('should insert multiple Model sources', function (done) {
             User.save([
                 {
@@ -155,7 +155,7 @@ describe('Associations', function () {
 
     });
 
-    describe('Model#at()', function () {
+    describe('#at()', function () {
         it('should find the source and all its associations', function (done) {
             User.at({ id: scope.users[0].id })
                 .then(function (user) {

@@ -9,14 +9,14 @@ var Book = require('./models/book');
 var Pasta = require('./models/pasta');
 var User = require('./models/user');
 
-describe('Simple Model', function () {
+describe('Model', function () {
 
     before(hooks.sync);
     after(hooks.clean);
 
     var scope = { };
 
-    describe('Model structure', function () {
+    describe('Structure', function () {
         before(function (done) {
             User.query({ sql: 'SHOW INDEX FROM ??', values: [ User.table ] })
                 .get(0)
@@ -49,21 +49,21 @@ describe('Simple Model', function () {
 
     });
 
-    describe('Model#table', function() {
+    describe('#table', function() {
         it('should get the model table name', function (done) {
             expect(Book.table).to.equals('book');
             done();
         })
     });
 
-    describe('Model#name', function() {
+    describe('#name', function() {
         it('should get the model name', function (done) {
             expect(Animal.name).to.equals('Animal');
             done();
         })
     });
 
-    describe('Model#save()', function() {
+    describe('#save()', function() {
         it('should insert one Model data', function (done) {
             Animal.save({
                 kind: 'bear',
@@ -163,7 +163,7 @@ describe('Simple Model', function () {
         });
     });
 
-    describe('Model#remove()', function() {
+    describe('#remove()', function() {
         it('should remove multiple data', function (done) {
             Animal.remove({ kind: 'hyena' })
                 .then(function (res) {
@@ -173,7 +173,7 @@ describe('Simple Model', function () {
         });
     });
 
-    describe('Model#at()', function () {
+    describe('#at()', function () {
         it('should find a piece of data using one of its unique field', function (done) {
             Animal.at({ name: scope.animal.name })
                 .then(function (animal) {
@@ -205,7 +205,7 @@ describe('Simple Model', function () {
 
     });
 
-    describe('Model#all()', function () {
+    describe('#all()', function () {
         it('should find multiple data', function (done) {
             Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] })
                 .then(function (animals) {
@@ -247,7 +247,7 @@ describe('Simple Model', function () {
         });
     });
 
-    describe('Model#upsert()', function () {
+    describe('#upsert()', function () {
         it('should insert one Model data with two primary keys', function (done) {
             Book.upsert({
                 title: 'La nuit des enfants rois',
@@ -274,7 +274,7 @@ describe('Simple Model', function () {
 
     });
 
-    describe('Model#sum(), Model#min(), Model#max(), Model#count()', function () {
+    describe('#sum(), #min(), #max(), #count()', function () {
         before(function (done) {
             Pasta.save([
                 { numero: 1, name: 'capellini' },
