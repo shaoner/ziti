@@ -3,8 +3,11 @@
 **Kind**: global class  
 
 * [Model](#Model)
+  * [.methods](#Model+methods)
   * [.table](#Model+table)
   * [.name](#Model+name)
+  * ~~[.setStatic](#Model+setStatic)~~
+  * ~~[.setMethod](#Model+setMethod)~~
   * [.build(data, [options])](#Model+build) ⇒ <code>[ModelInstance](/api/instance/)</code>
   * [.save(data, [options])](#Model+save) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.update(data, where, [options])](#Model+update) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -17,14 +20,15 @@
   * [.max(column, where, [options])](#Model+max) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.count(where, [options])](#Model+count) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.index(fields, [options])](#Model+index)
-  * [.setStatic(name, fn)](#Model+setStatic)
-  * [.setMethod(name, fn)](#Model+setMethod)
   * [.query(query, [options])](#Model+query) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.sync([options])](#Model+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.createTable([options])](#Model+createTable) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.dropTable([options])](#Model+dropTable) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.migrate([options])](#Model+migrate) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
 
+<a name="Model+methods"></a>
+### model.methods
+**Kind**: instance property of <code>[Model](#Model)</code>  
 <a name="Model+table"></a>
 ### model.table
 The associated table name
@@ -35,6 +39,32 @@ The associated table name
 The model name
 
 **Kind**: instance property of <code>[Model](#Model)</code>  
+<a name="Model+setStatic"></a>
+### ~~model.setStatic~~
+***Deprecated***
+
+Set a new Model method
+
+**Kind**: instance property of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the method |
+| fn | <code>function</code> | The method |
+
+<a name="Model+setMethod"></a>
+### ~~model.setMethod~~
+***Deprecated***
+
+Set a new Model Instance method
+
+**Kind**: instance property of <code>[Model](#Model)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the method |
+| fn | <code>function</code> | The method |
+
 <a name="Model+build"></a>
 ### model.build(data, [options]) ⇒ <code>[ModelInstance](/api/instance/)</code>
 Build a Model instance
@@ -192,28 +222,6 @@ Add a new index on some fields
 | [options.unique] | <code>boolean</code> | unique index |
 | [options.fulltext] | <code>boolean</code> | fulltext index |
 | [options.spacial] | <code>boolean</code> | spacial index |
-
-<a name="Model+setStatic"></a>
-### model.setStatic(name, fn)
-Set a new Model method
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the method |
-| fn | <code>function</code> | The method |
-
-<a name="Model+setMethod"></a>
-### model.setMethod(name, fn)
-Set a new Model Instance method
-
-**Kind**: instance method of <code>[Model](#Model)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the method |
-| fn | <code>function</code> | The method |
 
 <a name="Model+query"></a>
 ### model.query(query, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>

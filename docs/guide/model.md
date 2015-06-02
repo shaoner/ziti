@@ -213,14 +213,16 @@ Take a look at [model instances](/guide/instance/) for more information.
 
 ### Model methods
 
-If the method is global to all model, you can use [ziti.setStatic](/api/ziti/#dbsetstaticname-fn) as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
+If the method is global to all model, you can use [ziti.statics](/api/ziti/#Db+statics) as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
 
-If the method is for a specific model, you can use [Model.setStatic](/api/model/#Model+setStatic) as well:
+If the method is for a specific model, you can directly assign the method to the [Model](/api/model/):
 
 ```javascript
-Animal.setStatic('getDogs', function () {
+Animal.getDogs = function () {
     return this.all({ type: 'dog' });
-});
+};
+
+// ...
 
 Animal.getDogs().then(function (dogs) {
    // dogs is an array of dogs
@@ -230,22 +232,24 @@ Animal.getDogs().then(function (dogs) {
 If you want to override a method already defined, you can use `this.constructor.prototype`:
 
 ```javascript
-Animal.setStatic('at', function () {
+Animal.at = function () {
     console.log('Please! Get me an animal!');
     return this.constructor.prototype.at.apply(this, arguments);
-});
+};
 ```
 
 ### Model instance methods
 
-If the method is global to all model instances, you can use [ziti.setMethod](/api/ziti/#Db+setMethod) as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
+If the method is global to all model instances, you can use [ziti.methods](/api/ziti/#Db+methods) as explained [here](/guide/ziti/#adding-global-methods-to-your-models-and-model-instances)
 
-If the method is for a specific model instance, you can use [Model.setMethod](/api/model/#Model+setMethod) as well:
+If the method is for a specific model instance, you can use [Model.methods](/api/model/#Model+methods) as well:
 
 ```javascript
-Animal.setMethod('sayHello', function () {
+Animal.methods.sayHello = function () {
     console.log('Hello there!');
-});
+};
+
+// ...
 
 Animal.at({ type: 'cat' }).then(function (cat) {
     cat.sayHello(); // Hello there!
@@ -255,8 +259,8 @@ Animal.at({ type: 'cat' }).then(function (cat) {
 If you want to override a method already defined, you can use `this.constructor.prototype` as well:
 
 ```javascript
-Animal.setMethod('refresh', function () {
+Animal.methods.refresh = function () {
     console.log('I am young again!');
     return this.constructor.prototype.refresh.apply(this, arguments);
-});
+};
 ```

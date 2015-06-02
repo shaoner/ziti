@@ -22,6 +22,10 @@
 **Kind**: global class  
 
 * [Db](#Db)
+  * [.statics](#Db+statics)
+  * [.methods](#Db+methods)
+  * ~~[.setStatic](#Db+setStatic)~~
+  * ~~[.setMethod](#Db+setMethod)~~
   * [.configure([config])](#Db+configure)
   * [.sync([options])](#Db+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.define(name, core, [options])](#Db+define) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -30,9 +34,43 @@
   * [.withConnection(fn)](#Db+withConnection) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.withTx(fn)](#Db+withTx) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.query(query, [options])](#Db+query) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.setStatic(name, fn)](#Db+setStatic)
-  * [.setMethod(name, fn)](#Db+setMethod)
   * [.create([config])](#Db+create) ⇒ <code>[Db](#Db)</code>
+
+<a name="Db+statics"></a>
+### db.statics
+Add a static method global to all models
+
+**Kind**: instance property of <code>[Db](#Db)</code>  
+<a name="Db+methods"></a>
+### db.methods
+Add a method global to all model instances
+
+**Kind**: instance property of <code>[Db](#Db)</code>  
+<a name="Db+setStatic"></a>
+### ~~db.setStatic~~
+***Deprecated***
+
+Add a static method global to all models
+
+**Kind**: instance property of <code>[Db](#Db)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the method |
+| fn | <code>function</code> | The method |
+
+<a name="Db+setMethod"></a>
+### ~~db.setMethod~~
+***Deprecated***
+
+Add a method global to all model instances
+
+**Kind**: instance property of <code>[Db](#Db)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>string</code> | Name of the method |
+| fn | <code>function</code> | The method |
 
 <a name="Db+configure"></a>
 ### db.configure([config])
@@ -195,28 +233,6 @@ ziti.query({ sql: 'INSERT INTO ?? SET ?', values: [ 'user', { name: 'Heisenberg'
 ziti.query('SELECT id FROM `user` WHERE `id` = 42');
 // SELECT `id` FROM `user` WHERE `id` = 42
 ```
-<a name="Db+setStatic"></a>
-### db.setStatic(name, fn)
-Add a static method global to all models
-
-**Kind**: instance method of <code>[Db](#Db)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the method |
-| fn | <code>function</code> | The method |
-
-<a name="Db+setMethod"></a>
-### db.setMethod(name, fn)
-Add a method global to all model instances
-
-**Kind**: instance method of <code>[Db](#Db)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| name | <code>string</code> | Name of the method |
-| fn | <code>function</code> | The method |
-
 <a name="Db+create"></a>
 ### db.create([config]) ⇒ <code>[Db](#Db)</code>
 Create a new connection.

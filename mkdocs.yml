@@ -20,3 +20,5 @@ pages:
 - About: 'about.md'
 theme: readthedocs
 extra_css: [ 'style.css' ]
+markdown_extensions:
+  - mdx_del_ins
