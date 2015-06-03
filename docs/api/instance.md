@@ -6,7 +6,7 @@
   * [.raw()](#Instance+raw) ⇒ <code>Object</code>
   * [.getValue(name)](#Instance+getValue) ⇒ <code>\*</code>
   * [.setValue(name, value)](#Instance+setValue)
-  * [.get([name])](#Instance+get)
+  * [.get([name])](#Instance+get) ⇒ <code>\*</code>
   * [.set(name, [value])](#Instance+set)
   * [.update(data, [options])](#Instance+update) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.remove([options])](#Instance+remove) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -40,7 +40,7 @@ Set the raw value of a field
 | value | <code>string</code> &#124; <code>Number</code> | The value of the field |
 
 <a name="Instance+get"></a>
-### instance.get([name])
+### instance.get([name]) ⇒ <code>\*</code>
 Get the value of a field using the getter if provided in the model.
 If the field is a reference it returns the according model instance.
 If no name is provided it returns an object filled with all values the same way
