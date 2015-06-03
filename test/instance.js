@@ -3,12 +3,18 @@ var _ = require('lodash');
 var ziti = require('../index');
 var hooks = require('./hooks');
 var Product = require('./models/product');
+var Country = require('./models/country');
 var ModelInstance = require('../lib/model-instance');
 
 describe('Instance', function () {
-    var productAddress;
+    var productCountry;
 
     before(hooks.sync);
+    before(function (done) {
+        Country.save({ name: 'France' }).then(function (country) {
+            productCountry = country;
+        }).finally(done).catch(done);
+    });
     after(hooks.clean);
 
     describe('#set()', function () {
@@ -64,12 +70,14 @@ describe('Instance', function () {
 
     describe('#save()', function () {
         it('should build and insert an instance into database', function (done) {
-            var torti = Product.build({ price: 10, name: 'torti' });
+            var torti = Product.build({ price: 10, name: 'torti', origin: productCountry });
+            expect(torti.get('origin_id')).to.be.above(0);
             torti.save().then(function (torti) {
                 expect(torti).to.be.ok.and.to.be.an.instanceof(ModelInstance);
                 expect(torti.get('id')).to.be.above(0);
                 expect(torti.get('price')).to.equals(10);
                 expect(torti.get('name')).to.equals('TORTI:10');
+                expect(torti.get('origin_id')).to.be.above(0);
             }).finally(done).catch(done);
         });
 
@@ -135,7 +143,7 @@ describe('Instance', function () {
 
     describe('#refresh()', function () {
         it('should set a field and refresh the instance data', function (done) {
-            Product.save({ price: 10, name: 'torti' }).then(function (torti) {
+            Product.save({ price: 10, name: 'torti', origin_id: productCountry.get('id') }).then(function (torti) {
                 expect(torti).to.be.ok.and.to.be.an.instanceof(ModelInstance);
                 torti.set({ price: 11 });
                 return torti.refresh();

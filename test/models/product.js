@@ -2,8 +2,9 @@
 
 var _ = require('lodash');
 var ziti = require('../../index');
+var Country = require('./country');
 
-var Product = ziti.define('Shop', {
+var Product = ziti.define('Product', {
     price: ziti.Int().default(0),
     name: ziti.String().set(function (name) {
         this.setValue('name', name.toUpperCase());
@@ -14,6 +15,7 @@ var Product = ziti.define('Shop', {
         }
         return this.getValue('name') + ':' + price;
     }),
+    origin: ziti.ForeignKey(Country)
 });
 
 module.exports = Product;
