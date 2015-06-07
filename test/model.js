@@ -5,15 +5,65 @@ var hooks = require('./hooks');
 
 var ModelInstance = require('../lib/model-instance');
 var Animal = require('./models/animal');
+var Book = require('./models/book');
+var Pasta = require('./models/pasta');
+var User = require('./models/user');
 
-describe('Simple Model', function () {
+describe('Model', function () {
 
     before(hooks.sync);
     after(hooks.clean);
 
     var scope = { };
 
-    describe('Model#save()', function() {
+    describe('Structure', function () {
+        before(function (done) {
+            User.query({ sql: 'SHOW INDEX FROM ??', values: [ User.table ] })
+                .get(0)
+                .then(function (res) {
+                    scope.userStructure = _.groupBy(res, 'Key_name');
+                }).finally(done).catch(done);
+        });
+
+        it('should check the primary key', function (done) {
+            var keynames = scope.userStructure;
+            expect(keynames.PRIMARY).to.be.an('array').and.to.have.length(1);
+            expect(keynames.PRIMARY[0].Column_name).to.equals('id');
+            done();
+        });
+
+        it('should check a unique key with one field', function (done) {
+            var keynames = scope.userStructure;
+            expect(keynames.nickname).to.be.an('array').and.to.have.length(1);
+            expect(keynames.nickname[0].Column_name).to.equals('nickname');
+            done();
+        });
+
+        it('should check a unique key with two fields', function (done) {
+            var keynames = scope.userStructure;
+            expect(keynames.uq_name).to.be.an('array').and.to.have.length(2);
+            expect(keynames.uq_name[0].Column_name).to.equals('firstname');
+            expect(keynames.uq_name[1].Column_name).to.equals('lastname');
+            done();
+        });
+
+    });
+
+    describe('#table', function() {
+        it('should get the model table name', function (done) {
+            expect(Book.table).to.equals('book');
+            done();
+        })
+    });
+
+    describe('#name', function() {
+        it('should get the model name', function (done) {
+            expect(Animal.name).to.equals('Animal');
+            done();
+        })
+    });
+
+    describe('#save()', function() {
         it('should insert one Model data', function (done) {
             Animal.save({
                 kind: 'bear',
@@ -113,7 +163,7 @@ describe('Simple Model', function () {
         });
     });
 
-    describe('Model#remove()', function() {
+    describe('#remove()', function() {
         it('should remove multiple data', function (done) {
             Animal.remove({ kind: 'hyena' })
                 .then(function (res) {
@@ -123,7 +173,7 @@ describe('Simple Model', function () {
         });
     });
 
-    describe('Model#at()', function () {
+    describe('#at()', function () {
         it('should find a piece of data using one of its unique field', function (done) {
             Animal.at({ name: scope.animal.name })
                 .then(function (animal) {
@@ -155,7 +205,7 @@ describe('Simple Model', function () {
 
     });
 
-    describe('Model#all()', function () {
+    describe('#all()', function () {
         it('should find multiple data', function (done) {
             Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] })
                 .then(function (animals) {
@@ -195,6 +245,71 @@ describe('Simple Model', function () {
                     done();
                 }).catch(done);
         });
+    });
+
+    describe('#upsert()', function () {
+        it('should insert one Model data with two primary keys', function (done) {
+            Book.upsert({
+                title: 'La nuit des enfants rois',
+                author: 'Bernard Lenteric',
+                year: 1942
+            }).then(function (res) {
+                expect(res).to.have.property('affectedRows', 1);
+            }).finally(done).catch(done);
+        });
+
+        it('should update one Model data with two primary keys', function (done) {
+            Book.upsert({
+                title: 'La nuit des enfants rois',
+                author: 'Bernard Lenteric',
+                year: 1981
+            }).then(function (res) {
+                expect(res).to.have.property('affectedRows', 2);
+                return Book.all(null);
+            }).then(function (books) {
+                expect(books).to.be.an('array').and.to.have.length(1);
+                expect(books[0].get('year')).to.equals(1981);
+            }).finally(done).catch(done);
+        });
+
+    });
+
+    describe('#sum(), #min(), #max(), #count()', function () {
+        before(function (done) {
+            Pasta.save([
+                { numero: 1, name: 'capellini' },
+                { numero: 3, name: 'spaghettini' },
+                { numero: 5, name: 'spaghetti' },
+                { numero: 7, name: 'spaghettoni' },
+                { name: 'fusilli' },
+                { name: 'penne' }
+            ]).finally(done).catch(done);
+        });
+
+        it('should get the sum of a column', function (done) {
+            Pasta.sum('numero').then(function (res) {
+                expect(res).to.equals(16);
+            }).finally(done).catch(done);
+        });
+
+        it('should get the min of a column', function (done) {
+            Pasta.min('numero').then(function (res) {
+                expect(res).to.equals(0);
+            }).finally(done).catch(done);
+        });
+
+        it('should get the max of a column', function (done) {
+            Pasta.max('numero').then(function (res) {
+                expect(res).to.equals(7);
+            }).finally(done).catch(done);
+        });
+
+        it('should get the number of rows', function (done) {
+            Pasta.count().then(function (res) {
+                expect(res).to.equals(6);
+            }).finally(done).catch(done);
+        });
+
     });
 
 });

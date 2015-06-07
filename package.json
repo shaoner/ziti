@@ -1,17 +1,18 @@
 {
   "name": "ziti",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "MySQL fast ORM",
   "main": "index.js",
   "scripts": {
     "test:lint": "jshint",
     "test:unit": "mocha",
     "test": "npm run test:lint && npm run test:unit",
-    "docs:ziti": "jsdoc2md lib/db.js > docs/api/ziti.md",
+    "docs:ziti": "jsdoc2md index.js lib/db.js > docs/api/ziti.md",
     "docs:model": "jsdoc2md lib/model.js > docs/api/model.md",
     "docs:instance": "jsdoc2md lib/model-instance.js > docs/api/instance.md",
     "docs:types": "jsdoc2md lib/types.js lib/type/*.js > docs/api/types.md",
-    "docs": "npm run docs:ziti && npm run docs:model && npm run docs:instance && npm run docs:types"
+    "docs:functions": "jsdoc2md lib/functions.js > docs/api/functions.md",
+    "docs": "npm run docs:ziti && npm run docs:model && npm run docs:instance && npm run docs:types && npm run docs:functions"
   },
   "repository": {
     "type": "git",
@@ -28,9 +29,9 @@
   },
   "homepage": "https://github.com/shaoner/ziti",
   "dependencies": {
-    "bluebird": "^2.9.25",
-    "lodash": "^3.9.1",
-    "mysql": "^2.6.2"
+    "bluebird": "~2.9.27",
+    "lodash": "~3.9.3",
+    "mysql": "~2.7.0"
   },
   "devDependencies": {
     "chai": "^2.3.0",

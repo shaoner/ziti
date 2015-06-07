@@ -1,6 +1,6 @@
 ## Defining a model
 
-First, you can define your models in separate files without wondering if ziti is connected to a database or not. You just have to call `ziti.define`
+First, you can define your models in separate files without wondering if ziti is connected to a database or not. You just have to call [ziti.define](/api/ziti/#Db+define)
 
 ```javascript
 var ziti = require('ziti');
@@ -21,9 +21,9 @@ ziti lets you add generic methods that will be added to all your models and mode
 For example, with our previous example:
 
 ```javascript
-ziti.setStatic('sayHello', function () {
+ziti.statics.sayHello = function () {
     console.log('Hello', this._name);
-});
+};
 
 // ...
 
@@ -33,9 +33,9 @@ User.sayHello(); // 'Hello User'
 You can also set instance methods with the same syntax:
 
 ```javascript
-ziti.setMethod('sayHello', function () {
+ziti.methods.sayHello = function () {
     console.log('Hello', this.model._name);
-});
+};
 
 // ...
 
@@ -46,15 +46,15 @@ User.at({ id: 1 }).then(function (user) {
 Of course, you can also set a method which has the same name of an existing one.
 
 ```javascript
-ziti.setStatic('at', function () {
+ziti.statics.at = function () {
     console.log('Lets find one', this._name);
     return this.constructor.prototype.at.apply(this, arguments);
-});
+};
 
-ziti.setMethod('remove', function () {
+ziti.methods.remove = function () {
     console.log('I dont wanna be a ', this.model.name, 'anymore!');
     return this.constructor.prototype.remove.apply(this, arguments);
-});
+};
 
 User.at({ id: 1 }).then(function (user) { // Lets find one User
     return user.remove(); // I dont wanna be a User anymore!
@@ -135,3 +135,14 @@ With autoMigrate option set to true, the previous age column will be dropped and
 
 
 For now, it only works when adding or removing a column, not when changing its type.
+
+## Retrieving a model
+
+Because of cycle dependencies, you may want to get a model without calling require:
+
+```javascript
+var User = ziti.get('User');
+```
+
+Of course, this only works if User has already been defined so it's more convenient to use it inside an asynchroneous function.
+If the model is not found, it returns undefined.

@@ -17,9 +17,9 @@
 <dt><a href="#StringType">StringType</a> ⇐ <code><a href="#BaseType">BaseType</a></code></dt>
 <dd></dd>
 </dl>
-## Objects
+## Mixins
 <dl>
-<dt><a href="#types">types</a> : <code>object</code></dt>
+<dt><a href="#Types">Types</a></dt>
 <dd></dd>
 </dl>
 <a name="AbstractType"></a>
@@ -28,7 +28,7 @@
 
 * [AbstractType](#AbstractType)
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -42,10 +42,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[AbstractType](#AbstractType)</code>  
 <a name="AbstractType+unique"></a>
-### abstractType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### abstractType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[AbstractType](#AbstractType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### abstractType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -104,7 +109,7 @@ Add this field to a scope or multiple scopes
 
 * [BaseType](#BaseType) ⇐ <code>[AbstractType](#AbstractType)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -118,10 +123,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[BaseType](#BaseType)</code>  
 <a name="AbstractType+unique"></a>
-### baseType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### baseType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[BaseType](#BaseType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### baseType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -183,7 +193,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -226,10 +236,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[ForeignKey](#ForeignKey)</code>  
 <a name="AbstractType+unique"></a>
-### foreignKey.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### foreignKey.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[ForeignKey](#ForeignKey)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### foreignKey.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -293,7 +308,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -358,10 +373,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[Many](#Many)</code>  
 <a name="AbstractType+unique"></a>
-### many.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### many.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[Many](#Many)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### many.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -422,7 +442,7 @@ Add this field to a scope or multiple scopes
   * [.zerofill()](#NumericType+zerofill) ⇒ <code>[NumericType](#NumericType)</code>
   * [.unsigned()](#NumericType+unsigned) ⇒ <code>[NumericType](#NumericType)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -446,10 +466,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[NumericType](#NumericType)</code>  
 <a name="AbstractType+unique"></a>
-### numericType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### numericType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[NumericType](#NumericType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### numericType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -512,7 +537,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -567,10 +592,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[One](#One)</code>  
 <a name="AbstractType+unique"></a>
-### one.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### one.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[One](#One)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### one.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -631,7 +661,7 @@ Add this field to a scope or multiple scopes
   * [.on(link)](#Reference+on) ⇒ <code>[Reference](#Reference)</code>
   * [.joinType(type)](#Reference+joinType) ⇒ <code>[Reference](#Reference)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -665,10 +695,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[Reference](#Reference)</code>  
 <a name="AbstractType+unique"></a>
-### reference.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### reference.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[Reference](#Reference)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### reference.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -729,7 +764,7 @@ Add this field to a scope or multiple scopes
   * [.charset()](#StringType+charset) ⇒ <code>[StringType](#StringType)</code>
   * [.collate()](#StringType+collate) ⇒ <code>[StringType](#StringType)</code>
   * [.primaryKey()](#AbstractType+primaryKey) ⇒ <code>[AbstractType](#AbstractType)</code>
-  * [.unique()](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
+  * [.unique([name])](#AbstractType+unique) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.autoIncrement()](#AbstractType+autoIncrement) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.notNull()](#AbstractType+notNull) ⇒ <code>[AbstractType](#AbstractType)</code>
   * [.default(value)](#AbstractType+default) ⇒ <code>[AbstractType](#AbstractType)</code>
@@ -753,10 +788,15 @@ Set this field as primary key
 
 **Kind**: instance method of <code>[StringType](#StringType)</code>  
 <a name="AbstractType+unique"></a>
-### stringType.unique() ⇒ <code>[AbstractType](#AbstractType)</code>
+### stringType.unique([name]) ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as unique
 
 **Kind**: instance method of <code>[StringType](#StringType)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [name] | <code>string</code> | Name of a unique constraint |
+
 <a name="AbstractType+autoIncrement"></a>
 ### stringType.autoIncrement() ⇒ <code>[AbstractType](#AbstractType)</code>
 Set this field as auto increment
@@ -808,152 +848,164 @@ Add this field to a scope or multiple scopes
 | --- | --- |
 | scope | <code>string</code> &#124; <code>Array.&lt;string&gt;</code> | 
 
-<a name="types"></a>
-## types : <code>object</code>
-**Kind**: global namespace  
+<a name="Types"></a>
+## Types
+**Kind**: global mixin  
 
-* [types](#types) : <code>object</code>
-  * [.Bit](#types.Bit) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Tinyint](#types.Tinyint) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Smallint](#types.Smallint) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Mediumint](#types.Mediumint) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Int](#types.Int) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Integer](#types.Integer) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Bigint](#types.Bigint) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Real](#types.Real) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Double](#types.Double) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Decimal](#types.Decimal) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Numeric](#types.Numeric) ⇒ <code>[NumericType](#NumericType)</code>
-  * [.Date](#types.Date) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Time](#types.Time) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Timestamp](#types.Timestamp) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Datetime](#types.Datetime) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Char](#types.Char) ⇒ <code>[StringType](#StringType)</code>
-  * [.Varchar](#types.Varchar) ⇒ <code>[StringType](#StringType)</code>
-  * [.Binary](#types.Binary) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Varbinary](#types.Varbinary) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Tinyblob](#types.Tinyblob) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Blob](#types.Blob) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Mediumblob](#types.Mediumblob) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Longblob](#types.Longblob) ⇒ <code>[BaseType](#BaseType)</code>
-  * [.Tinytext](#types.Tinytext) ⇒ <code>[StringType](#StringType)</code>
-  * [.Text](#types.Text) ⇒ <code>[StringType](#StringType)</code>
-  * [.Mediumtext](#types.Mediumtext) ⇒ <code>[StringType](#StringType)</code>
-  * [.Longtext](#types.Longtext) ⇒ <code>[StringType](#StringType)</code>
-  * [.Enum](#types.Enum) ⇒ <code>[StringType](#StringType)</code>
-  * [.Set](#types.Set) ⇒ <code>[StringType](#StringType)</code>
-  * [.One](#types.One) ⇒ <code>[One](#One)</code>
-  * [.Many](#types.Many) ⇒ <code>[Many](#Many)</code>
-  * [.ForeignKey](#types.ForeignKey) ⇒ <code>[ForeignKey](#ForeignKey)</code>
+* [Types](#Types)
+  * [.Bit](#Types.Bit) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Tinyint](#Types.Tinyint) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Smallint](#Types.Smallint) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Mediumint](#Types.Mediumint) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Int](#Types.Int) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Integer](#Types.Integer) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Bigint](#Types.Bigint) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Real](#Types.Real) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Double](#Types.Double) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Decimal](#Types.Decimal) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Numeric](#Types.Numeric) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.Date](#Types.Date) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Time](#Types.Time) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Timestamp](#Types.Timestamp) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Datetime](#Types.Datetime) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Char](#Types.Char) ⇒ <code>[StringType](#StringType)</code>
+  * [.Varchar](#Types.Varchar) ⇒ <code>[StringType](#StringType)</code>
+  * [.Binary](#Types.Binary) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Varbinary](#Types.Varbinary) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Tinyblob](#Types.Tinyblob) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Blob](#Types.Blob) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Mediumblob](#Types.Mediumblob) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Longblob](#Types.Longblob) ⇒ <code>[BaseType](#BaseType)</code>
+  * [.Tinytext](#Types.Tinytext) ⇒ <code>[StringType](#StringType)</code>
+  * [.Text](#Types.Text) ⇒ <code>[StringType](#StringType)</code>
+  * [.Mediumtext](#Types.Mediumtext) ⇒ <code>[StringType](#StringType)</code>
+  * [.Longtext](#Types.Longtext) ⇒ <code>[StringType](#StringType)</code>
+  * [.Enum](#Types.Enum) ⇒ <code>[StringType](#StringType)</code>
+  * [.Set](#Types.Set) ⇒ <code>[StringType](#StringType)</code>
+  * [.One](#Types.One) ⇒ <code>[One](#One)</code>
+  * [.Many](#Types.Many) ⇒ <code>[Many](#Many)</code>
+  * [.ForeignKey](#Types.ForeignKey) ⇒ <code>[ForeignKey](#ForeignKey)</code>
+  * [.Boolean](#Types.Boolean) ⇒ <code>[NumericType](#NumericType)</code>
+  * [.String](#Types.String) ⇒ <code>[StringType](#StringType)</code>
+  * [.NOW()](#Types.NOW) ⇒ <code>function</code>
 
-<a name="types.Bit"></a>
-### types.Bit ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Tinyint"></a>
-### types.Tinyint ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Smallint"></a>
-### types.Smallint ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Mediumint"></a>
-### types.Mediumint ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Int"></a>
-### types.Int ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Integer"></a>
-### types.Integer ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Bigint"></a>
-### types.Bigint ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Real"></a>
-### types.Real ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Double"></a>
-### types.Double ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Decimal"></a>
-### types.Decimal ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Numeric"></a>
-### types.Numeric ⇒ <code>[NumericType](#NumericType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Date"></a>
-### types.Date ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Time"></a>
-### types.Time ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Timestamp"></a>
-### types.Timestamp ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Datetime"></a>
-### types.Datetime ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Char"></a>
-### types.Char ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Varchar"></a>
-### types.Varchar ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Binary"></a>
-### types.Binary ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Varbinary"></a>
-### types.Varbinary ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Tinyblob"></a>
-### types.Tinyblob ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Blob"></a>
-### types.Blob ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Mediumblob"></a>
-### types.Mediumblob ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Longblob"></a>
-### types.Longblob ⇒ <code>[BaseType](#BaseType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Tinytext"></a>
-### types.Tinytext ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Text"></a>
-### types.Text ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Mediumtext"></a>
-### types.Mediumtext ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Longtext"></a>
-### types.Longtext ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Enum"></a>
-### types.Enum ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.Set"></a>
-### types.Set ⇒ <code>[StringType](#StringType)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-<a name="types.One"></a>
-### types.One ⇒ <code>[One](#One)</code>
-**Kind**: static property of <code>[types](#types)</code>  
-
-| Param | Type |
-| --- | --- |
-| target | <code>string</code> &#124; <code>Model</code> | 
-
-<a name="types.Many"></a>
-### types.Many ⇒ <code>[Many](#Many)</code>
-**Kind**: static property of <code>[types](#types)</code>  
+<a name="Types.Bit"></a>
+### Types.Bit ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Tinyint"></a>
+### Types.Tinyint ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Smallint"></a>
+### Types.Smallint ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Mediumint"></a>
+### Types.Mediumint ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Int"></a>
+### Types.Int ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Integer"></a>
+### Types.Integer ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Bigint"></a>
+### Types.Bigint ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Real"></a>
+### Types.Real ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Double"></a>
+### Types.Double ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Decimal"></a>
+### Types.Decimal ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Numeric"></a>
+### Types.Numeric ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Date"></a>
+### Types.Date ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Time"></a>
+### Types.Time ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Timestamp"></a>
+### Types.Timestamp ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Datetime"></a>
+### Types.Datetime ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Char"></a>
+### Types.Char ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Varchar"></a>
+### Types.Varchar ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Binary"></a>
+### Types.Binary ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Varbinary"></a>
+### Types.Varbinary ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Tinyblob"></a>
+### Types.Tinyblob ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Blob"></a>
+### Types.Blob ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Mediumblob"></a>
+### Types.Mediumblob ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Longblob"></a>
+### Types.Longblob ⇒ <code>[BaseType](#BaseType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Tinytext"></a>
+### Types.Tinytext ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Text"></a>
+### Types.Text ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Mediumtext"></a>
+### Types.Mediumtext ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Longtext"></a>
+### Types.Longtext ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Enum"></a>
+### Types.Enum ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.Set"></a>
+### Types.Set ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.One"></a>
+### Types.One ⇒ <code>[One](#One)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
 
 | Param | Type |
 | --- | --- |
 | target | <code>string</code> &#124; <code>Model</code> | 
 
-<a name="types.ForeignKey"></a>
-### types.ForeignKey ⇒ <code>[ForeignKey](#ForeignKey)</code>
-**Kind**: static property of <code>[types](#types)</code>  
+<a name="Types.Many"></a>
+### Types.Many ⇒ <code>[Many](#Many)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
 
 | Param | Type |
 | --- | --- |
 | target | <code>string</code> &#124; <code>Model</code> | 
 
+<a name="Types.ForeignKey"></a>
+### Types.ForeignKey ⇒ <code>[ForeignKey](#ForeignKey)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+
+| Param | Type |
+| --- | --- |
+| target | <code>string</code> &#124; <code>Model</code> | 
+
+<a name="Types.Boolean"></a>
+### Types.Boolean ⇒ <code>[NumericType](#NumericType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.String"></a>
+### Types.String ⇒ <code>[StringType](#StringType)</code>
+**Kind**: static property of <code>[Types](#Types)</code>  
+<a name="Types.NOW"></a>
+### Types.NOW() ⇒ <code>function</code>
+**Kind**: static method of <code>[Types](#Types)</code>  

@@ -2,32 +2,18 @@
 
  MySQL ORM for node.js
 
-[![npm](https://img.shields.io/npm/v/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
-[![Travis branch](https://img.shields.io/travis/shaoner/ziti/master.svg?style=flat-square)](https://travis-ci.org/shaoner/ziti)
-[![npm](https://img.shields.io/npm/l/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
-[![npm](https://img.shields.io/npm/dm/ziti.svg?style=flat-square)](https://www.npmjs.com/package/ziti)
+[![npm](https://img.shields.io/npm/v/ziti.svg)](https://www.npmjs.com/package/ziti)
+[![Travis branch](https://img.shields.io/travis/shaoner/ziti/master.svg)](https://travis-ci.org/shaoner/ziti)
+[![npm](https://img.shields.io/npm/l/ziti.svg)](https://www.npmjs.com/package/ziti)
+[![npm](https://img.shields.io/npm/dm/ziti.svg)](https://www.npmjs.com/package/ziti)
+[![Documentation Status](https://readthedocs.org/projects/ziti/badge/?version=latest)](https://readthedocs.org/projects/ziti/?badge=latest)
+[![Dependency Status](https://david-dm.org/shaoner/ziti.svg)](https://david-dm.org/shaoner/ziti)
 
 ## Installation
 
 ```
 npm install ziti
 ```
-
-The complete documentation is available at [http://ziti.readthedocs.org](http://ziti.readthedocs.org/)
-
-Note that ziti is still in the alpha phase of the release life cycle. 
-A lot of fix/changes are made during this phase, some tests are added and the documentation changes fast as well.
-
-If you want to test it, please use the [devel branch](https://github.com/shaoner/ziti/tree/devel) instead of the current npm package and feel free to report any [issue](https://github.com/shaoner/ziti/issues).
-To use the devel branch, you can add this in your package.json:
-
-```json
-"dependencies": {
-    "ziti": "shaoner/ziti#devel"
-}
-```
-
-## First steps
 
 ### Define your Models
 
@@ -46,8 +32,6 @@ var User = ziti.define('User', {
 module.exports = User;
 ```
 
-For more information about models, take a look at the [Model tutorial](/tutorial/model/)
-
 ### Setting up ziti
 
 ```javascript
@@ -59,7 +43,6 @@ ziti.configure({
     debug: true,
 });
 ```
-For more information about ziti, take a look at the [ziti tutorial](/tutorial/ziti/)
 
 ### Synchronizing
 
@@ -77,4 +60,16 @@ ziti.sync().then(function () {
 }).then(function (user) {
     // The new user has been removed from database
 });
+```
+
+For more information, you can read the [Guide](http://ziti.ewdl.org/en/latest/tutorial/getting-started/)
+
+## Tests
+
+To run tests on ziti, first take a look at the [config](/test/config.js) to use your own test server
+
+Then, just run:
+
+```
+npm test
 ```

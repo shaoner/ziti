@@ -9,6 +9,7 @@ var Photo = require('./models/photo');
 var Address = require('./models/address');
 var Phone = require('./models/phone');
 var Language = require('./models/language');
+var Friend = require('./models/friend');
 
 describe('Associations', function () {
 
@@ -18,27 +19,27 @@ describe('Associations', function () {
     var scope = { };
 
     describe('Model', function() {
-        it('Address should have a user_id', function (done) {
+        it('A One referenced model has the correct foreign key', function (done) {
             expect(Address._core).to.have.property('user_id');
             done();
         });
 
-        it('Photo should have a user_id', function (done) {
+        it('A Many referenced model has the correct foreign key', function (done) {
             expect(Photo._core).to.have.property('user_id');
             done();
         });
 
-        it('UserLanguage model should exists and have a user_id and a language_id', function (done) {
+        it('A Many to many referenced model should exists and have a both foreign keys', function (done) {
             var UserLanguage = ziti.get('UserLanguage');
             expect(UserLanguage).to.be.ok;
             expect(UserLanguage._core).to.have.property('user_id');
-            expect(UserLanguage._core).to.have.property('language_id');
+            expect(UserLanguage._core).to.have.property('langs_id');
             done();
         });
 
     });
 
-    describe('Model#save()', function () {
+    describe('#save()', function () {
         it('should insert multiple Model sources', function (done) {
             User.save([
                 {
@@ -124,30 +125,59 @@ describe('Associations', function () {
                 { name: 'spanish' },
                 { name: 'arabic' }
             ]).then(function(langs) {
-                    scope.langs = langs;
-                    var ul = [ ];
+                scope.langs = langs;
+                var ul = [ ];
                 for (var i = 0, len = scope.users.length; i < len; ++i) {
                         for (var j = 0, jlen = langs.length; j < jlen; ++j) {
                             if ((i + j) % 3 === 2) { continue; }
-                            ul.push({ user_id: scope.users[i].id, language_id: langs[j].id });
+                            ul.push({ user_id: scope.users[i].id, langs_id: langs[j].get('id') });
                         }
-                    }
-                    return UserLanguage.save(ul);
-                }).then(function (ul) {
-                    scope.userlangs = ul;
-                }).finally(done).catch(done);
+                }
+                return UserLanguage.save(ul);
+            }).then(function (ul) {
+                scope.userlangs = ul;
+            }).finally(done).catch(done);
         });
+
+        it('should insert ForeignKey Model targets', function (done) {
+            expect(Friend._pk).to.eql([ 'user_id', 'target_id' ]);
+            Friend.save([
+                { user_id: scope.users[0].id, target_id: scope.users[1].id },
+                { user_id: scope.users[1].id, target_id: scope.users[0].id },
+                { user_id: scope.users[0].id, target_id: scope.users[2].id },
+                { user_id: scope.users[2].id, target_id: scope.users[0].id },
+            ]).then(function (friends) {
+                expect(friends).to.be.an('array').and.to.have.length(4);
+            }).finally(done).catch(done);
+        });
+
+        it('should insert ForeignKey Model targets (2nd form)', function (done) {
+            expect(Friend._pk).to.eql([ 'user_id', 'target_id' ]);
+            Friend.save([
+                { user: scope.users[1], target: scope.users[2] },
+                { user: scope.users[2], target: scope.users[1] },
+            ]).then(function (friends) {
+                expect(friends).to.be.an('array').and.to.have.length(2);
+                return Friend.at({ user_id: scope.users[1].id, target_id: scope.users[2].id });
+            }).then(function (friend) {
+                expect(friend).not.to.be.null;
+            }).finally(done).catch(done);
+        });
+
     });
 
-    describe('Model#at()', function () {
+    describe('#at()', function () {
         it('should find the source and all its associations', function (done) {
             User.at({ id: scope.users[0].id })
                 .then(function (user) {
                     var raw = user.raw();
                     expect(raw).to.have.property('firstname', 'dexter');
                     expect(raw).to.have.property('address');
+                    expect(raw.address.street).to.equals('jump street');
                     expect(raw).to.have.property('photos');
+                    expect(raw.photos[0].path).to.equals('am.jpg');
                     expect(raw).to.have.property('langs');
+                    expect(raw.langs[0].name).to.equals('english');
                 }).finally(done).catch(done);
         });
 
