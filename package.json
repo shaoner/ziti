@@ -1,6 +1,6 @@
 {
   "name": "ziti",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "MySQL fast ORM",
   "main": "index.js",
   "scripts": {
