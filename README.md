@@ -15,6 +15,8 @@
 npm install ziti
 ```
 
+The complete documentation is available at http://ziti.ewdl.org/
+
 ### Define your Models
 
 ```javascript
