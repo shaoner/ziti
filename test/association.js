@@ -146,10 +146,21 @@ describe('Associations', function () {
                 { user_id: scope.users[1].id, target_id: scope.users[0].id },
                 { user_id: scope.users[0].id, target_id: scope.users[2].id },
                 { user_id: scope.users[2].id, target_id: scope.users[0].id },
-                { user_id: scope.users[1].id, target_id: scope.users[2].id },
-                { user_id: scope.users[2].id, target_id: scope.users[1].id }
             ]).then(function (friends) {
-                expect(friends).to.be.an('array').and.to.have.length(6);
+                expect(friends).to.be.an('array').and.to.have.length(4);
+            }).finally(done).catch(done);
+        });
+
+        it('should insert ForeignKey Model targets (2nd form)', function (done) {
+            expect(Friend._pk).to.eql([ 'user_id', 'target_id' ]);
+            Friend.save([
+                { user: scope.users[1], target: scope.users[2] },
+                { user: scope.users[2], target: scope.users[1] },
+            ]).then(function (friends) {
+                expect(friends).to.be.an('array').and.to.have.length(2);
+                return Friend.at({ user_id: scope.users[1].id, target_id: scope.users[2].id });
+            }).then(function (friend) {
+                expect(friend).not.to.be.null;
             }).finally(done).catch(done);
         });
 
