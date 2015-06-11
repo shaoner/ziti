@@ -28,7 +28,7 @@
   * ~~[.setMethod](#Db+setMethod)~~
   * [.configure([config])](#Db+configure)
   * [.sync([options])](#Db+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.define(name, core, [options])](#Db+define) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.define(name, core, [options])](#Db+define) ⇒ <code>Model</code>
   * [.get(name)](#Db+get) ⇒ <code>[Model](/api/model)</code>
   * [.end()](#Db+end) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.withConnection(fn)](#Db+withConnection) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -130,7 +130,7 @@ ziti.sync({ dropTable: true, createTable: true, autoMigrate: false })
 // * Photo Model has been synchronized
 ```
 <a name="Db+define"></a>
-### db.define(name, core, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### db.define(name, core, [options]) ⇒ <code>Model</code>
 Create a new Model
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
