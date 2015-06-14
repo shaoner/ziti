@@ -10,15 +10,15 @@
   * ~~[.setMethod](#Model+setMethod)~~
   * [.build(data, [options])](#Model+build) ⇒ <code>[ModelInstance](/api/instance/)</code>
   * [.save(data, [options])](#Model+save) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.update(data, where, [options])](#Model+update) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.upsert(data, [options])](#Model+upsert)
-  * [.remove(where, [options])](#Model+remove) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.at(where, [options])](#Model+at) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.all(where, [options])](#Model+all) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.sum(column, where, [options])](#Model+sum) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.min(column, where, [options])](#Model+min) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.max(column, where, [options])](#Model+max) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.count(where, [options])](#Model+count) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.update(data, where, [options])](#Model+update) ⇒ <code>[Query](/api/query/)</code>
+  * [.upsert(data, [options])](#Model+upsert) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.remove(where, [options])](#Model+remove) ⇒ <code>[Query](/api/query/)</code>
+  * [.at(where, [options])](#Model+at) ⇒ <code>[Query](/api/query/)</code>
+  * [.all(where, [options])](#Model+all) ⇒ <code>[Query](/api/query/)</code>
+  * [.sum(column, where, [options])](#Model+sum) ⇒ <code>[Query](/api/query/)</code>
+  * [.min(column, where, [options])](#Model+min) ⇒ <code>[Query](/api/query/)</code>
+  * [.max(column, where, [options])](#Model+max) ⇒ <code>[Query](/api/query/)</code>
+  * [.count(where, [options])](#Model+count) ⇒ <code>[Query](/api/query/)</code>
   * [.index(fields, [options])](#Model+index)
   * [.query(query, [options])](#Model+query) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.sync([options])](#Model+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -91,7 +91,7 @@ Save new items into the associated model table
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> |  | Use this connection |
 
 <a name="Model+update"></a>
-### model.update(data, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.update(data, where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Update row(s) with new data
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -104,7 +104,7 @@ Update row(s) with new data
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+upsert"></a>
-### model.upsert(data, [options])
+### model.upsert(data, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
 Insert data or update the old row if a duplicate key conflict occurs
 in a UNIQUE index or PRIMARY KEY
 
@@ -117,7 +117,7 @@ in a UNIQUE index or PRIMARY KEY
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+remove"></a>
-### model.remove(where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.remove(where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Remove row(s) from the associated table
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -129,7 +129,7 @@ Remove row(s) from the associated table
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+at"></a>
-### model.at(where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.at(where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Retrieve a single Model instance
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -143,7 +143,7 @@ Retrieve a single Model instance
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+all"></a>
-### model.all(where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.all(where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Retrieve a multiple Model instances
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -154,10 +154,11 @@ Retrieve a multiple Model instances
 | [options] | <code>Object</code> |  |
 | [options.attributes] | <code>Array.&lt;string&gt;</code> | The attributes to retrieve |
 | [options.$] | <code>string</code> | The scope to use |
+| [options.limit] | <code>Number</code> | Limit the results |
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+sum"></a>
-### model.sum(column, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.sum(column, where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Get the sum of the numeric values of the column
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -170,7 +171,7 @@ Get the sum of the numeric values of the column
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+min"></a>
-### model.min(column, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.min(column, where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Get the minimum numeric values of the column
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -183,7 +184,7 @@ Get the minimum numeric values of the column
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+max"></a>
-### model.max(column, where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.max(column, where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Get the maximum numeric values of the column
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
@@ -196,7 +197,7 @@ Get the maximum numeric values of the column
 | [options.using] | <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code> | Use this connection |
 
 <a name="Model+count"></a>
-### model.count(where, [options]) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+### model.count(where, [options]) ⇒ <code>[Query](/api/query/)</code>
 Count the number of rows
 
 **Kind**: instance method of <code>[Model](#Model)</code>  

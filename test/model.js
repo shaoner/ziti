@@ -185,9 +185,17 @@ describe('Model', function () {
 
     describe('#remove()', function() {
         it('should remove multiple data', function (done) {
+            Animal.remove({ kind: 'hyena' }).limit(2)
+                .then(function (res) {
+                    expect(res).to.have.property('affectedRows', 2);
+                    done();
+                }).catch(done);
+        });
+
+        it('should remove multiple data (2nd form)', function (done) {
             Animal.remove({ kind: 'hyena' })
                 .then(function (res) {
-                    expect(res).to.have.property('affectedRows', 3);
+                    expect(res).to.have.property('affectedRows', 1);
                     done();
                 }).catch(done);
         });
@@ -242,6 +250,22 @@ describe('Model', function () {
                 }).catch(done);
         });
 
+        it('should find multiple data with a limit', function (done) {
+            Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] }).limit(2)
+                .then(function (animals) {
+                    expect(animals).to.be.an('array').and.to.have.length(2);
+                    animals.forEach(function (animal) {
+                        expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                        var raw = animal.raw();
+                        expect(raw).to.have.property('kind');
+                        expect(raw).to.have.property('name');
+                        expect(raw).to.have.property('age');
+
+                    });
+                    done();
+                }).catch(done);
+        });
+
         it('should find multiple data with a subset of attributes', function (done) {
             Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] },
                        { attributes: [ 'id', 'name' ] })
@@ -254,6 +278,47 @@ describe('Model', function () {
                         expect(raw).to.have.property('name');
                         expect(raw).to.have.property('age');
                     });
+                    done();
+                }).catch(done);
+        });
+
+        it('should find multiple data with a subset of attributes (2nd form)', function (done) {
+            Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] }).only('id', 'name')
+                .then(function (animals) {
+                    expect(animals).to.be.an('array').and.to.have.length(3);
+                    animals.forEach(function (animal) {
+                        expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                        var raw = animal.raw();
+                        expect(raw).to.not.have.property('kind');
+                        expect(raw).to.have.property('name');
+                        expect(raw).to.have.property('age');
+                    });
+                    done();
+                }).catch(done);
+        });
+
+        it('should find multiple data ordered by id desc', function (done) {
+            Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] })
+                .only('id', 'name')
+                .limit(3)
+                .desc('id')
+                .then(function (animals) {
+                    expect(animals).to.be.an('array').and.to.have.length(3);
+                    expect(animals[0].get('id')).to.be.above(animals[1].get('id'))
+                    expect(animals[1].get('id')).to.be.above(animals[2].get('id'))
+                    done();
+                }).catch(done);
+        });
+
+        it('should find multiple data ordered by id asc', function (done) {
+            Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] })
+                .only('id', 'name')
+                .limit(3)
+                .asc('id')
+                .then(function (animals) {
+                    expect(animals).to.be.an('array').and.to.have.length(3);
+                    expect(animals[0].get('id')).to.be.below(animals[1].get('id'))
+                    expect(animals[1].get('id')).to.be.below(animals[2].get('id'))
                     done();
                 }).catch(done);
         });
@@ -285,7 +350,7 @@ describe('Model', function () {
                 year: 1981
             }).then(function (res) {
                 expect(res).to.have.property('affectedRows', 2);
-                return Book.all(null);
+                return Book.all();
             }).then(function (books) {
                 expect(books).to.be.an('array').and.to.have.length(1);
                 expect(books[0].get('year')).to.equals(1981);

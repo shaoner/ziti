@@ -15,6 +15,7 @@ pages:
   - ziti: 'api/ziti.md'
   - Model: 'api/model.md'
   - Instance: 'api/instance.md'
+  - Query: 'api/query.md'
   - Types: 'api/types.md'
   - Functions: 'api/functions.md'
 - About: 'about.md'

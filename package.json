@@ -12,7 +12,8 @@
     "docs:instance": "jsdoc2md lib/model-instance.js > docs/api/instance.md",
     "docs:types": "jsdoc2md lib/types.js lib/type/*.js > docs/api/types.md",
     "docs:functions": "jsdoc2md lib/functions.js > docs/api/functions.md",
-    "docs": "npm run docs:ziti && npm run docs:model && npm run docs:instance && npm run docs:types && npm run docs:functions"
+    "docs:query": "jsdoc2md lib/query/*.js > docs/api/query.md",
+    "docs": "npm run docs:ziti && npm run docs:model && npm run docs:instance && npm run docs:types && npm run docs:functions && npm run docs:query"
   },
   "repository": {
     "type": "git",

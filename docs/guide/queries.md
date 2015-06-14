@@ -1,4 +1,184 @@
-## Raw
+## The Query class
+
+A [Query](/api/query/) is an object that helps you identify rows in different cases:
+
+- Retrieving data (`SELECT`)
+- Updating data (`UPDATE`)
+- Removing data (`DELETE`)
+
+The default behavior is to retrieve one row to build a single instance.
+
+A Query can be customized using chaining methods like adding a limit, filtering rows, ordering or changing the behavior of the query.
+
+Note that the query is not executed until you call [then](/api/query/#Query+then) or [run](/api/query/#Query+run).
+
+### [at](/api/query/#Query+at)
+
+It specifies the WHERE clause of the query in order to filter the results using a condition.
+It's necessary when you want to find one instance.
+
+```javascript
+Animal.at({ id: 42 })
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+// WHERE `Animal`.`id` = 42
+// LIMIT 1
+```
+
+### [all](/api/query/#Query+all)
+
+This is used if you want to retrieve an array of instances instead of a single instance.
+
+```javascript
+Animal.all()
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+
+Animal.at({ type: 'lion' }).all().limit(10)
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+// LIMIT 10
+
+Animal.all({ type: 'lion' }).limit(10)
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+// LIMIT 10
+```
+
+### [update](/api/query/#Query+update)
+
+This makes the query to update some data in database.
+
+```javascript
+Animal.update({ type: 'lion' }).at({ id: 42 })
+// UPDATE `animal` `Animal` SET `Animal`.`type` = 'lion'
+// WHERE `Animal`.`id` = 42
+
+Animal.at({ id: 42 }).update({ type: 'lion' })
+// UPDATE `animal` `Animal` SET `Animal`.`type` = 'lion'
+// WHERE `Animal`.`id` = 42
+
+Animal.update({ type: 'lion' }, { id: 42 })
+// UPDATE `animal` `Animal` SET `Animal`.`type` = 'lion'
+// WHERE `Animal`.`id` = 42
+
+Animal.update({ type: 'bird' }).limit(10)
+// UPDATE `animal` `Animal` SET `Animal`.`type` = 'bird'
+// LIMIT 10
+```
+
+### [remove](/api/query/#Query+remove)
+
+This makes the query to remove some data in database.
+
+```javascript
+Animal.at({ id: 42 }).remove()
+// DELETE FROM `animal`
+// WHERE `animal`.`id` = 42
+
+Animal.remove().at({ id: 42 })
+// DELETE FROM `animal`
+// WHERE `animal`.`id` = 42
+
+Animal.remove().limit(10)
+// DELETE FROM `animal`
+// LIMIT 10
+```
+
+### [count](/api/query/#Query+count)
+
+This counts the rows you select and returns the result.
+
+```javascript
+Animal.at({ type: 'lion' }).count()
+// SELECT COUNT(*) FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+
+Animal.count().at({ type: 'lion' })
+// SELECT COUNT(*) FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+```
+
+### [sum](/api/query/#Query+sum)
+
+It retrieves the sum of the values in a column
+
+```javascript
+Animal.sum('id').at({ type: 'lion' })
+// SELECT SUM(`id`) FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+```
+
+
+### [min](/api/query/#Query+min)
+
+It retrieves the minimum value of a column
+
+```javascript
+Animal.min('id').at({ type: 'lion' })
+// SELECT MIN(`id`) FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+```
+
+### [max](/api/query/#Query+max)
+
+It retrieves the maximum value of a column
+
+```javascript
+Animal.max('id').at({ type: 'lion' })
+// SELECT MAX(`id`) FROM `animal` `Animal`
+// WHERE `Animal`.`type` = 'lion'
+```
+
+### Other options
+
+#### [limit](/api/query/#Query+limit)
+
+Specify the maximum number of rows to filter
+
+```javascript
+Animal.all().limit(10)
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+// LIMIT 10
+```
+
+#### [asc](/api/query/#Query+asc)
+
+Specify columns to sort in ascending order
+
+```javascript
+Animal.all().asc('type')
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+// ORDER BY `Animal`.`type` ASC
+```
+
+#### [desc](/api/query/#Query+desc)
+
+Specify columns to sort in descending order
+
+```javascript
+Animal.all().desc('id')
+// SELECT `Animal`.`id`, `Animal`.`type` FROM `animal` `Animal`
+// ORDER BY `Animal`.`id` DESC
+```
+
+#### [use](/api/query/#Query+use)
+
+Make the query to use the provided connection. This is mainly useful for transactions.
+
+```javascript
+ziti.withTx(function (tx) {
+    Animal.save({ type: 'bird' }).use(tx)
+        .then(function (animal) {
+            return User.update({ animal_id: animal.get('id') }, { id: 42 }).use(tx)
+        });
+});
+
+// START TRANSACTION
+// INSERT INTO `animal` `Animal` (`type`) VALUES('bird')
+// UPDATE `user` `User` SET `User`.`animal_id` = 69 WHERE `User`.`id` = 42
+// COMMIT
+```
+
+## Raw queries
 
 It is possible to send raw queries to the server by using either:
 
@@ -45,7 +225,6 @@ ziti.withTx(function (tx) {
 ```
 
 See [ziti.withTx](/api/ziti/#Db+withTx)
-
 
 ## Expressions
 
