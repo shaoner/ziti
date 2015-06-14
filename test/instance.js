@@ -86,6 +86,20 @@ describe('Instance', function () {
         });
     });
 
+    describe('#toJSON()', function () {
+        var torti;
+
+        before(function () {
+            torti = Product.build({ price: 10, name: 'torti' });
+        });
+
+        it('should get instance JSON representation', function (done) {
+            expect(torti).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+            expect(torti.toJSON()).to.equals('{"price":10,"name":"TORTI"}');
+            done();
+        });
+    });
+
     describe('#save()', function () {
         it('should build and insert an instance into database', function (done) {
             var torti = Product.build({ price: 10, name: 'torti', origin: productCountry });

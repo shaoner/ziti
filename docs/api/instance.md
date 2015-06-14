@@ -4,6 +4,7 @@
 
 * [Instance](#Instance)
   * [.raw()](#Instance+raw) ⇒ <code>Object</code>
+  * [.toJSON()](#Instance+toJSON) ⇒ <code>string</code>
   * [.getValue(name)](#Instance+getValue) ⇒ <code>\*</code>
   * [.setValue(name, value)](#Instance+setValue)
   * [.get([name])](#Instance+get) ⇒ <code>\*</code>
@@ -16,6 +17,11 @@
 <a name="Instance+raw"></a>
 ### instance.raw() ⇒ <code>Object</code>
 Give the data relative to the instance in an object of the form { fieldName: value }
+
+**Kind**: instance method of <code>[Instance](#Instance)</code>  
+<a name="Instance+toJSON"></a>
+### instance.toJSON() ⇒ <code>string</code>
+JSON representation of the instance
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  
 <a name="Instance+getValue"></a>
