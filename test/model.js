@@ -91,6 +91,15 @@ describe('Model', function () {
                 }).finally(done).catch(done);
         });
 
+        it('should insert one Model with a field default function', function (done) {
+            Book.save({ title: 'Les fourmis', author: 'Bernard Werber' })
+                .then(function (book) {
+                    var curYear = new Date().getFullYear();
+                    expect(book.get('year')).to.equals(curYear);
+                    return book.remove();
+                }).finally(done).catch(done);
+        });
+
         it('should insert multiple Model data at once', function (done) {
             Animal.save([
                 { kind: 'lion', name: 'simba' },
