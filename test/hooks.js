@@ -10,12 +10,6 @@ module.exports = {
         });
     },
     clean: function () {
-        return ziti.sync({
-            dropTable: true,
-            createTable: false,
-            autoMigrate: false
-        }).then(function () {
-            return ziti.end();
-        });
+        return ziti.end();
     }
 };
