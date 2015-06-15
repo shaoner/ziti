@@ -2,10 +2,14 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var ziti = require('../index');
 var hooks = require('./hooks');
-var Pasta = require('./models/pasta');
 
 describe('Functions', function () {
 
+    var Pasta;
+
+    before(function () {
+        Pasta = require('./models/pasta');
+    });
     before(hooks.sync);
     before(function (done) {
         Pasta.save([

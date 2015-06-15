@@ -4,15 +4,19 @@ var ziti = require('../index');
 var hooks = require('./hooks');
 
 var ModelInstance = require('../lib/model-instance');
-var User = require('./models/user');
-var Photo = require('./models/photo');
-var Address = require('./models/address');
-var Phone = require('./models/phone');
-var Language = require('./models/language');
-var Friend = require('./models/friend');
 
 describe('Associations', function () {
 
+    var User, Photo, Address, Phone, Language, Friend;
+
+    before(function () {
+        User = require('./models/user');
+        Photo = require('./models/photo');
+        Address = require('./models/address');
+        Phone = require('./models/phone');
+        Language = require('./models/language');
+        Friend = require('./models/friend');
+    });
     before(hooks.sync);
     after(hooks.clean);
 

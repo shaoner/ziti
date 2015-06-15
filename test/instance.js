@@ -2,15 +2,19 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var ziti = require('../index');
 var hooks = require('./hooks');
-var Product = require('./models/product');
-var Country = require('./models/country');
 var ModelInstance = require('../lib/model-instance');
 
 describe('Instance', function () {
-    var productCountry;
 
+    var Product, Country, productCountry;
+
+    before(function () {
+        Product = require('./models/product');
+        Country = require('./models/country');
+    });
     before(hooks.sync);
     before(function (done) {
+        console.log('hello baby');
         Country.save({ name: 'France' }).then(function (country) {
             productCountry = country;
         }).finally(done).catch(done);
@@ -18,7 +22,12 @@ describe('Instance', function () {
     after(hooks.clean);
 
     describe('#set()', function () {
-        var torti = Product.build({ price: 10, name: 'torti' });
+        var torti;
+
+        before(function () {
+            torti = Product.build({ price: 10, name: 'torti' });
+        });
+
         it('should check instance fields are correctly set at build', function (done) {
             expect(torti).to.be.ok.and.to.be.an.instanceof(ModelInstance);
             expect(torti.getValue('price')).to.equals(10);
@@ -39,7 +48,12 @@ describe('Instance', function () {
     });
 
     describe('#get()', function () {
-        var torti = Product.build({ price: 10, name: 'torti' });
+        var torti;
+
+        before(function () {
+            torti = Product.build({ price: 10, name: 'torti' });
+        });
+
         it('should check instance fields are correctly set at build', function (done) {
             expect(torti).to.be.ok.and.to.be.an.instanceof(ModelInstance);
             expect(torti.get('price')).to.equals(10);
@@ -59,7 +73,11 @@ describe('Instance', function () {
     });
 
     describe('#raw()', function () {
-        var torti = Product.build({ price: 10, name: 'torti' });
+        var torti;
+
+        before(function () {
+            torti = Product.build({ price: 10, name: 'torti' });
+        });
 
         it('should get instance raw data', function (done) {
             expect(torti).to.be.ok.and.to.be.an.instanceof(ModelInstance);

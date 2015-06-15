@@ -4,13 +4,17 @@ var ziti = require('../index');
 var hooks = require('./hooks');
 
 var ModelInstance = require('../lib/model-instance');
-var Animal = require('./models/animal');
-var Book = require('./models/book');
-var Pasta = require('./models/pasta');
-var User = require('./models/user');
 
 describe('Model', function () {
 
+    var Animal, Book, Pasta, User;
+
+    before(function () {
+        Animal = require('./models/animal');
+        Book = require('./models/book');
+        Pasta = require('./models/pasta');
+        User = require('./models/user');
+    });
     before(hooks.sync);
     after(hooks.clean);
 

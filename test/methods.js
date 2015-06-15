@@ -2,17 +2,21 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var ziti = require('../index');
 var hooks = require('./hooks');
-var Animal = require('./models/animal');
 
 describe('Model & model instance methods', function () {
-    before(function (done) {
+
+    var Animal;
+
+    before(function () {
+        Animal = require('./models/animal');
+    });
+    before(function () {
         ziti.statics.has = function (attribute) {
             return attribute in this._core;
         };
         ziti.methods.isNew = function () {
             return this._isNew;
         };
-        done();
     });
     before(hooks.sync);
     before(function (done) {

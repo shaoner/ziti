@@ -2,9 +2,14 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 var ziti = require('../index');
 var hooks = require('./hooks');
-var Animal = require('./models/animal');
 
 describe('Queries', function () {
+
+    var Animal;
+
+    before(function () {
+        Animal = require('./models/animal');
+    });
     before(hooks.sync);
     before(function (done) {
         Animal.save([
