@@ -84,6 +84,13 @@ describe('Model', function () {
             }).catch(done);
         });
 
+        it('should insert one Model data with multiple primary keys', function (done) {
+            Book.save({ title: 'Les fourmis', author: 'Bernard Werber', year: 1991 })
+                .then(function (book) {
+                    return book.remove();
+                }).finally(done).catch(done);
+        });
+
         it('should insert multiple Model data at once', function (done) {
             Animal.save([
                 { kind: 'lion', name: 'simba' },
