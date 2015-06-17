@@ -11,7 +11,7 @@ var User = ziti.define('User', {
     age: ziti.Int().default(18),
     address: Address,
     photos: [ Photo ],
-    langs: ziti.Many(Language).through('UserLanguage'),
+    langs: [ Language, 'UserLanguage' ],
     signup_date: ziti.Datetime().default(ziti.NOW)
 });
 

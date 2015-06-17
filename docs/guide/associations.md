@@ -55,7 +55,7 @@ var Photo = ziti.define('Photo', {
 
 var User = ziti.define('User', {
     name: ziti.String,
-    address: Address
+    address: Address,
     photos: [ Photo ]
 });
 
@@ -96,14 +96,23 @@ User.at({ id: 1 }).then(function (user) {
 * A User has **many** Language and a Language has **many** User (n:m)
 
 ```javascript
-var Language = ziti.define('Photo', {
+var Language = ziti.define('Language', {
     name: ziti.String
 });
 
 var User = ziti.define('User', {
     name: ziti.String,
-    address: Address
+    address: Address,
     photos: [ Photo ],
+    langs: [ Language, 'UserLanguage' ]
+});
+
+// OR
+
+var User = ziti.define('User', {
+    name: ziti.String,
+    address: ziti.One(Address),
+    photos: ziti.Many(Photo),
     langs: ziti.Many(Language).through('UserLanguage')
 });
 ```
