@@ -202,7 +202,7 @@ describe('Model', function () {
     });
 
     describe('#at()', function () {
-        it('should find a piece of data using one of its unique field', function (done) {
+        it('should find a piece of data using one of its unique field and get a Model instance', function (done) {
             Animal.at({ name: scope.animal.name })
                 .then(function (animal) {
                     expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
@@ -234,7 +234,7 @@ describe('Model', function () {
     });
 
     describe('#all()', function () {
-        it('should find multiple data', function (done) {
+        it('should find multiple data and get an array of Model instances', function (done) {
             Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] })
                 .then(function (animals) {
                     expect(animals).to.be.an('array').and.to.have.length(3);

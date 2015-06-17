@@ -171,9 +171,10 @@ describe('Associations', function () {
     });
 
     describe('#at()', function () {
-        it('should find the source and all its associations', function (done) {
+        it('should find the source and all its associations as a Model instance', function (done) {
             User.at({ id: scope.users[0].id })
                 .then(function (user) {
+                    expect(user).to.be.an.instanceof(ModelInstance);
                     var raw = user.raw();
                     expect(raw).to.have.property('firstname', 'dexter');
                     expect(raw).to.have.property('address');
@@ -182,6 +183,22 @@ describe('Associations', function () {
                     expect(raw.photos[0].path).to.equals('am.jpg');
                     expect(raw).to.have.property('langs');
                     expect(raw.langs[0].name).to.equals('english');
+                }).finally(done).catch(done);
+        });
+
+    });
+
+    describe('#all', function () {
+        it('should find multiple sources and all their associations as Model instances', function (done) {
+            User.all()
+                .then(function (users) {
+                    expect(users).to.be.an('array').and.to.have.length(3);
+                    expect(users[0]).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(users[1]).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(users[2]).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(users[0].get('address')).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(users[1].get('address')).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(users[2].get('address')).to.be.ok.and.to.be.an.instanceof(ModelInstance);
                 }).finally(done).catch(done);
         });
 
