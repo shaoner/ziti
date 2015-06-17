@@ -14,7 +14,6 @@ describe('Instance', function () {
     });
     before(hooks.sync);
     before(function (done) {
-        console.log('hello baby');
         Country.save({ name: 'France' }).then(function (country) {
             productCountry = country;
         }).finally(done).catch(done);
