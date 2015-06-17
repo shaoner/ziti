@@ -18,6 +18,7 @@ pages:
   - Query: 'api/query.md'
   - Types: 'api/types.md'
   - Functions: 'api/functions.md'
+- Tests: 'tests.md'
 - About: 'about.md'
 theme: readthedocs
 extra_css: [ 'style.css' ]

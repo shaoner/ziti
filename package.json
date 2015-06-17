@@ -13,7 +13,8 @@
     "docs:types": "jsdoc2md lib/types.js lib/type/*.js > docs/api/types.md",
     "docs:functions": "jsdoc2md lib/functions.js > docs/api/functions.md",
     "docs:query": "jsdoc2md lib/query/*.js > docs/api/query.md",
-    "docs": "npm run docs:ziti && npm run docs:model && npm run docs:instance && npm run docs:types && npm run docs:functions && npm run docs:query"
+    "docs:tests": "mocha --reporter markdown > docs/tests.md",
+    "docs": "npm run docs:ziti && npm run docs:model && npm run docs:instance && npm run docs:types && npm run docs:functions && npm run docs:query && npm run docs:tests"
   },
   "repository": {
     "type": "git",
