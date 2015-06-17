@@ -9,6 +9,7 @@
   * [.limit(max)](#Query+limit) ⇒ <code>[Query](#Query)</code>
   * [.asc(...columns)](#Query+asc) ⇒ <code>[Query](#Query)</code>
   * [.desc(...columns)](#Query+desc) ⇒ <code>[Query](#Query)</code>
+  * [.raw()](#Query+raw) ⇒ <code>[Query](#Query)</code>
   * [.update(data, [where])](#Query+update) ⇒ <code>[Query](#Query)</code>
   * [.remove([where])](#Query+remove) ⇒ <code>[Query](#Query)</code>
   * [.select()](#Query+select) ⇒ <code>[Query](#Query)</code>
@@ -142,6 +143,12 @@ Specify columns to sort in descending order
 | --- | --- | --- |
 | ...columns | <code>string</code> | Columns to sort |
 
+<a name="Query+raw"></a>
+### query.raw() ⇒ <code>[Query](#Query)</code>
+When retrieving data, it returns raw data instead of Model instance(s)
+
+**Kind**: instance method of <code>[Query](#Query)</code>  
+**Returns**: <code>[Query](#Query)</code> - this  
 <a name="Query+update"></a>
 ### query.update(data, [where]) ⇒ <code>[Query](#Query)</code>
 Set the query as update

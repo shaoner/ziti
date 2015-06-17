@@ -186,6 +186,19 @@ describe('Associations', function () {
                 }).finally(done).catch(done);
         });
 
+        it('should find the source and all its associations as raw data', function (done) {
+            User.at({ id: scope.users[0].id }).raw()
+                .then(function (user) {
+                    expect(user).to.have.property('firstname', 'dexter');
+                    expect(user).to.have.property('address');
+                    expect(user.address.street).to.equals('jump street');
+                    expect(user).to.have.property('photos');
+                    expect(user.photos[0].path).to.equals('am.jpg');
+                    expect(user).to.have.property('langs');
+                    expect(user.langs[0].name).to.equals('english');
+                }).finally(done).catch(done);
+        });
+
     });
 
     describe('#all', function () {
@@ -202,5 +215,22 @@ describe('Associations', function () {
                 }).finally(done).catch(done);
         });
 
+        it('should find multiple sources and all their associations as Model instances', function (done) {
+            User.all().raw().asc('id')
+                .then(function (users) {
+                    expect(users).to.be.an('array').and.to.have.length(3);
+                    expect(users[0]).to.be.ok.and.to.be.an('object');
+                    expect(users[1]).to.be.ok.and.to.be.an('object');
+                    expect(users[2]).to.be.ok.and.to.be.an('object');
+                    expect(users[0].address).to.be.ok.and.to.be.an('object');
+                    expect(users[1].address).to.be.ok.and.to.be.an('object');
+                    expect(users[2].address).to.be.ok.and.to.be.an('object');
+                    expect(users[0].photos).to.be.ok.and.to.be.an('array');
+                    expect(users[1].photos).to.be.ok.and.to.be.an('array');
+                    expect(users[2].photos).to.be.ok.and.to.be.an('array');
+                }).finally(done).catch(done);
+        });
+
     });
+
 });

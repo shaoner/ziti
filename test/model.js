@@ -212,6 +212,16 @@ describe('Model', function () {
                 }).catch(done);
         });
 
+        it('should find a piece of data using one of its unique field and get an object', function (done) {
+            Animal.at({ name: scope.animal.name }).raw()
+                .then(function (animal) {
+                    expect(animal).to.be.ok.and.to.be.an('object');
+                    expect(animal.name).to.equals(scope.animal.name);
+                    expect(animal.id).to.equals(scope.animal.id);
+                    done();
+                }).catch(done);
+        });
+
         it('should not find any data', function (done) {
             Animal.at({ name: 'alexandre' })
                 .then(function (animal) {
@@ -245,6 +255,20 @@ describe('Model', function () {
                         expect(raw).to.have.property('name');
                         expect(raw).to.have.property('age');
 
+                    });
+                    done();
+                }).catch(done);
+        });
+
+        it('should find multiple data and get an array of raw data', function (done) {
+            Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] }).raw()
+                .then(function (animals) {
+                    expect(animals).to.be.an('array').and.to.have.length(3);
+                    animals.forEach(function (animal) {
+                        expect(animal).to.be.ok.and.to.be.an('object');
+                        expect(animal).to.have.property('kind');
+                        expect(animal).to.have.property('name');
+                        expect(animal).to.have.property('age');
                     });
                     done();
                 }).catch(done);
