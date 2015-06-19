@@ -888,6 +888,7 @@ Add this field to a scope or multiple scopes
   * [.Boolean](#Types.Boolean) ⇒ <code>[NumericType](#NumericType)</code>
   * [.String](#Types.String) ⇒ <code>[StringType](#StringType)</code>
   * [.NOW()](#Types.NOW) ⇒ <code>function</code>
+  * [.Id()](#Types.Id) ⇒ <code>[NumericType](#NumericType)</code>
 
 <a name="Types.Bit"></a>
 ### Types.Bit ⇒ <code>[BaseType](#BaseType)</code>
@@ -1008,4 +1009,7 @@ Add this field to a scope or multiple scopes
 **Kind**: static property of <code>[Types](#Types)</code>  
 <a name="Types.NOW"></a>
 ### Types.NOW() ⇒ <code>function</code>
+**Kind**: static method of <code>[Types](#Types)</code>  
+<a name="Types.Id"></a>
+### Types.Id() ⇒ <code>[NumericType](#NumericType)</code>
 **Kind**: static method of <code>[Types](#Types)</code>  
