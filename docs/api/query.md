@@ -9,6 +9,7 @@
   * [.limit(max)](#Query+limit) ⇒ <code>[Query](#Query)</code>
   * [.asc(...columns)](#Query+asc) ⇒ <code>[Query](#Query)</code>
   * [.desc(...columns)](#Query+desc) ⇒ <code>[Query](#Query)</code>
+  * [.group(...columns)](#Query+group) ⇒ <code>[Query](#Query)</code>
   * [.raw()](#Query+raw) ⇒ <code>[Query](#Query)</code>
   * [.update(data, [where])](#Query+update) ⇒ <code>[Query](#Query)</code>
   * [.remove([where])](#Query+remove) ⇒ <code>[Query](#Query)</code>
@@ -142,6 +143,17 @@ Specify columns to sort in descending order
 | Param | Type | Description |
 | --- | --- | --- |
 | ...columns | <code>string</code> | Columns to sort |
+
+<a name="Query+group"></a>
+### query.group(...columns) ⇒ <code>[Query](#Query)</code>
+Speficy how to group the result-set by one or more columns
+
+**Kind**: instance method of <code>[Query](#Query)</code>  
+**Returns**: <code>[Query](#Query)</code> - this  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ...columns | <code>string</code> | Columns to group |
 
 <a name="Query+raw"></a>
 ### query.raw() ⇒ <code>[Query](#Query)</code>

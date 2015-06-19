@@ -347,6 +347,23 @@ describe('Model', function () {
                 }).catch(done);
         });
 
+        it('should find multiple data grouped by column', function (done) {
+            Animal.all().only('id', 'name', 'kind')
+                .group('kind')
+                .limit(5)
+                .asc('id')
+                .raw()
+                .then(function (animals) {
+                    expect(animals).to.be.an('array').and.to.have.length(5);
+                    // check the uniqueness of the `kind` attribute
+                    var groups = _.groupBy(animals, 'kind');
+                    _.forOwn(groups, function (group) {
+                        expect(group).to.be.an('array').and.to.have.length(1);
+                    });
+                    done();
+                }).catch(done);
+        });
+
         it('should not find any data', function (done) {
             Animal.all({ kind: 'spider' })
                 .then(function (animals) {

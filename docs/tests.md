@@ -998,6 +998,25 @@ Animal.all({ $or: [ { kind: 'lion' }, { kind: 'shark' } ] })
     }).catch(done);
 ```
 
+should find multiple data grouped by column.
+
+```js
+Animal.all().only('id', 'name', 'kind')
+    .group('kind')
+    .limit(5)
+    .asc('id')
+    .raw()
+    .then(function (animals) {
+        expect(animals).to.be.an('array').and.to.have.length(5);
+        // check the uniqueness of the `kind` attribute
+        var groups = _.groupBy(animals, 'kind');
+        _.forOwn(groups, function (group) {
+            expect(group).to.be.an('array').and.to.have.length(1);
+        });
+        done();
+    }).catch(done);
+```
+
 should not find any data.
 
 ```js
