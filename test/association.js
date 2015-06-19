@@ -41,6 +41,14 @@ describe('Associations', function () {
             done();
         });
 
+        it('A Foreign key is properly defined', function (done) {
+            expect(Phone._core).to.have.property('user_id');
+            expect(Phone._core.user_id._primaryKey).to.be.false;
+            expect(Phone._core.user_id._autoIncrement).to.be.false;
+            expect(Phone._core.user_id._typeName).to.equals(User._core.id._typeName);
+            done();
+        });
+
     });
 
     describe('#save()', function () {
