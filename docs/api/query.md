@@ -24,6 +24,7 @@
   * [.run()](#Query+run) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.then(resolve, reject)](#Query+then) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.finally(handler)](#Query+finally) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+  * [.tap(handler)](#Query+tap) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.setOptions([options])](#Query+setOptions) ↩︎
 
 <a name="Query+only"></a>
@@ -397,7 +398,7 @@ User.at({ id: 42 }).run().then(function (user) {
 Shortcut for `query.run().then(resolve, reject)`
 
 **Kind**: instance method of <code>[Query](#Query)</code>  
-**See**: [Bluebird](https://github.com/petkaantonov/bluebird/blob/master/API.md#thenfunction-fulfilledhandler--function-rejectedhandler----promise)  
+**See**: [Bluebird#then](https://github.com/petkaantonov/bluebird/blob/master/API.md#thenfunction-fulfilledhandler--function-rejectedhandler----promise)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -409,7 +410,18 @@ Shortcut for `query.run().then(resolve, reject)`
 Shortcut for `query.run().finally(handler)`
 
 **Kind**: instance method of <code>[Query](#Query)</code>  
-**See**: [Bluebird](https://github.com/petkaantonov/bluebird/blob/master/API.md#finallyfunction-handler---promise)  
+**See**: [Bluebird#finally](https://github.com/petkaantonov/bluebird/blob/master/API.md#finallyfunction-handler---promise)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| handler | <code>function</code> | Promise handler |
+
+<a name="Query+tap"></a>
+### query.tap(handler) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
+Shortcut for `query.run().tap(handler)`
+
+**Kind**: instance method of <code>[Query](#Query)</code>  
+**See**: [Bluebird#tap](https://github.com/petkaantonov/bluebird/blob/master/API.md#tapfunction-handler---promise)  
 
 | Param | Type | Description |
 | --- | --- | --- |
