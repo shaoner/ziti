@@ -10,7 +10,7 @@
     "docs:ziti": "jsdoc2md index.js lib/db.js > docs/api/ziti.md",
     "docs:model": "jsdoc2md lib/model.js > docs/api/model.md",
     "docs:instance": "jsdoc2md lib/model-instance.js > docs/api/instance.md",
-    "docs:types": "jsdoc2md lib/types.js lib/type/*.js > docs/api/types.md",
+    "docs:types": "jsdoc2md -s order --src lib/types.js lib/type/*-type.js lib/type/reference.js lib/type/foreign-key.js lib/type/one.js lib/type/many.js > docs/api/types.md",
     "docs:functions": "jsdoc2md lib/functions.js > docs/api/functions.md",
     "docs:query": "jsdoc2md lib/query/*.js > docs/api/query.md",
     "docs:tests": "mocha --reporter markdown > docs/tests.md",
