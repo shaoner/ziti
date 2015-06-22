@@ -935,7 +935,7 @@ Add this field to a scope or multiple scopes
 * [Many](#Many) ⇐ <code>[One](#One)</code>
   * [new Many(target)](#new_Many_new)
   * [.through(target)](#Many+through) ↩︎
-  * [.relatedName(name)](#One+relatedName) ↩︎
+  * [.relatedName(name)](#Many+relatedName) ↩︎
   * [.on(link)](#Reference+on) ↩︎
   * [.joinType(type)](#Reference+joinType) ↩︎
   * [.primaryKey()](#AbstractType+primaryKey) ↩︎
@@ -967,19 +967,45 @@ Set an intermediary target when using a many to many association
 | --- | --- | --- |
 | target | <code>string</code> &#124; <code>Model</code> | The intermediary model |
 
-<a name="One+relatedName"></a>
+<a name="Many+relatedName"></a>
 ### many.relatedName(name) ↩︎
 The name to use for the back reference in the target
-This is useful when setting a One attribute in the source related
+This is useful when setting a Many attribute in the source related
 to an existing ForeignKey attribute in the target
+Note that if it is used after [through](/api/types/#Many+through),
+it refers to the intermediary target
 
 **Kind**: instance method of <code>[Many](#Many)</code>  
 **Chainable**  
+**Overrides:** <code>[relatedName](#One+relatedName)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | name | <code>string</code> | Name of the attribute |
 
+**Example**  
+```js
+var UserLanguage = ziti.define('UserLanguage', {
+    lang: ziti.ForeignKey('Language'),
+    speaker: ziti.ForeignKey('User')
+});
+
+var Language = ziti.define('Language', {
+    name: ziti.String,
+    users: ziti.Many('User')
+               .relatedName('lang')
+               .through(UserLanguage)
+               .relatedName('speaker')
+});
+
+var User = ziti.define('User', {
+    nickname: ziti.String,
+    langs: ziti.Many(Language)
+               .relatedName('speaker')
+               .through(UserLanguage)
+               .relatedName('lang')
+});
+```
 <a name="Reference+on"></a>
 ### many.on(link) ↩︎
 Set a link between source and target using { sourceField: targetField }

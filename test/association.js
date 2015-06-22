@@ -191,6 +191,9 @@ describe('Associations', function () {
                     expect(raw.photos[0].path).to.equals('am.jpg');
                     expect(raw).to.have.property('langs');
                     expect(raw.langs[0].name).to.equals('english');
+                    expect(raw.friends).to.be.an('array').and.to.have.length(2);
+                    expect(raw.friends[0]).to.have.property('nickname');
+                    expect(raw.friends[1]).to.have.property('nickname');
                 }).finally(done).catch(done);
         });
 

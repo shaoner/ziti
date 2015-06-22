@@ -12,6 +12,7 @@ var User = ziti.define('User', {
     address: Address,
     photos: [ Photo ],
     langs: [ Language, 'UserLanguage' ],
+    friends: ziti.Many('User').relatedName('user').through(Friend).relatedName('target'),
     signup_date: ziti.Datetime().default(ziti.NOW)
 });
 
