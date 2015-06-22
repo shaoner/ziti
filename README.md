@@ -15,26 +15,28 @@
 npm install ziti
 ```
 
-The complete documentation is available at http://ziti.ewdl.org/
+The API documentation is available at [http://ziti.ewdl.org/](http://ziti.ewdl.org/) including a guide and many examples.
 
-### Define your Models
+### Define your Models in separate files
 
 ```javascript
 var ziti = require('ziti');
 var Address = require('./address');
 var Photo = require('./photo');
+var Language = require('./language');
 
 var User = ziti.define('User', {
-    name: ziti.String,
+    name: ziti.String().unique(),
     age: ziti.Int().default(18),
-    address: Address,
-    photos: [ Photo ]
+    address: Address,                   // One to One relationship
+    photos: [ Photo ],                  // One to Many relationship
+    langs: [ Language, 'UserLanguage' ] // Many to Many relationship
 });
 
 module.exports = User;
 ```
 
-### Setting up ziti
+### Configure & synchronize your models
 
 ```javascript
 ziti.configure({
@@ -44,24 +46,25 @@ ziti.configure({
     database: 'ziti_test',
     debug: true,
 });
+
+ziti.sync().then(function () {
+    // All tables have been created
+});
 ```
 
-### Synchronizing
+### Play with your models anywhere
 
 ```javascript
-ziti.sync().then(function () {
-    // A table 'user' have been created
-    return User.save({ name: 'alex' });
-}).then(function (user) {
-    // A new user named 'alex' have been inserted, by default he's 18
-    return user.update({ age: 28 });
-}).then(function (user) {
-    // His age have been updated to 28
-    console.log(user.raw()); // { name: 'alex', age: 28 }
-    return user.remove();
-}).then(function (user) {
-    // The new user has been removed from database
-});
+
+User.save({ name: 'alex' }) // A new user named 'alex' is created, age is 18 by default
+    .then(function (user) {
+        return user.update({ age: 28 }); // His age is updated to 28
+    }).then(function (user) {
+        console.log(user.raw()); // { name: 'alex', age: 28 }
+        return user.remove(); // The user is removed from database
+    }).then(function (user) {
+        // ...
+    });
 ```
 
 For more information, you can read the [Guide](http://ziti.ewdl.org/en/latest/tutorial/getting-started/)
