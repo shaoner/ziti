@@ -82,6 +82,7 @@ Build a Model instance
 Save new items into the associated model table
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
+**Resolve**: <code>[Array.&lt;ModelInstance&gt;\|ModelInstance](/api/instance/)</code>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -109,6 +110,7 @@ Insert data or update the old row if a duplicate key conflict occurs
 in a UNIQUE index or PRIMARY KEY
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
+**Resolve**: <code>Object</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -229,6 +231,7 @@ Add a new index on some fields
 Send a SQL query
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
+**Resolve**: <code>Array.&lt;Object&gt;</code> - Results  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -272,6 +275,7 @@ Synchronize the Model with the database
 Create the associated table if not exists
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
+**Resolve**: <code>Object</code> - The results  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -283,6 +287,7 @@ Create the associated table if not exists
 Delete the associated table if exists
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
+**Resolve**: <code>Object</code> - The results  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -294,6 +299,7 @@ Delete the associated table if exists
 Add/remove columns from the table to match the current Model
 
 **Kind**: instance method of <code>[Model](#Model)</code>  
+**Resolve**: <code>Object</code> - The results  
 
 | Param | Type | Description |
 | --- | --- | --- |

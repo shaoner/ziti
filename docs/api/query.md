@@ -397,6 +397,7 @@ User.at({ id: 42 }).run().then(function (user) {
 Shortcut for `query.run().then(resolve, reject)`
 
 **Kind**: instance method of <code>[Query](#Query)</code>  
+**See**: [Bluebird](https://github.com/petkaantonov/bluebird/blob/master/API.md#thenfunction-fulfilledhandler--function-rejectedhandler----promise)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -408,7 +409,7 @@ Shortcut for `query.run().then(resolve, reject)`
 Shortcut for `query.run().finally(handler)`
 
 **Kind**: instance method of <code>[Query](#Query)</code>  
-**Resolve**: <code>Array.&lt;Object&gt;</code>  
+**See**: [Bluebird](https://github.com/petkaantonov/bluebird/blob/master/API.md#finallyfunction-handler---promise)  
 
 | Param | Type | Description |
 | --- | --- | --- |

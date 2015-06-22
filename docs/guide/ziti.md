@@ -134,7 +134,7 @@ With autoMigrate option set to true, the previous age column will be dropped and
 | id        | int(11)      | NO   | PRI | NULL    | auto_increment |
 
 
-For now, it only works when adding or removing a column, not when changing its type.
+For now, it only works when adding or removing a column, not when changing its definition.
 
 ## Retrieving a model
 

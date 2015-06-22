@@ -76,6 +76,7 @@ Update the instance with new data and save them in the database.
 This is equivalent to calling [set](#Instance+set) + [save](#Instance+save)
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  
+**Resolve**: <code>ModelInstance</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -89,6 +90,7 @@ Remove the instance in database and reset it as new
 This means you can call still use this instance
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  
+**Resolve**: <code>ModelInstance</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -101,6 +103,7 @@ Refresh the instance by fetching data from the database.
 This does not affect references.
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  
+**Resolve**: <code>ModelInstance</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -114,6 +117,7 @@ If the instance is marked as new it is inserted, otherwise it is updated.
 The updated data are only the fields that have been explicitly set.
 
 **Kind**: instance method of <code>[Instance](#Instance)</code>  
+**Resolve**: <code>ModelInstance</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |

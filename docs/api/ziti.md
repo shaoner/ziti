@@ -28,8 +28,8 @@
   * ~~[.setMethod](#Db+setMethod)~~
   * [.configure([config])](#Db+configure)
   * [.sync([options])](#Db+sync) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
-  * [.define(name, core, [options])](#Db+define) ⇒ <code>Model</code>
-  * [.get(name)](#Db+get) ⇒ <code>[Model](/api/model)</code>
+  * [.define(name, core, [options])](#Db+define) ⇒ <code>[Model](/api/model/)</code>
+  * [.get(name)](#Db+get) ⇒ <code>[Model](/api/model/)</code>
   * [.end()](#Db+end) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.withConnection(fn)](#Db+withConnection) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
   * [.withTx(fn)](#Db+withTx) ⇒ <code>[Promise](https://github.com/petkaantonov/bluebird)</code>
@@ -108,6 +108,7 @@ var Photo = ziti.define('Photo', {
 Synchronizes models with the database
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
+**Resolve**: <code>Object</code>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -130,7 +131,7 @@ ziti.sync({ dropTable: true, createTable: true, autoMigrate: false })
 // * Photo Model has been synchronized
 ```
 <a name="Db+define"></a>
-### db.define(name, core, [options]) ⇒ <code>Model</code>
+### db.define(name, core, [options]) ⇒ <code>[Model](/api/model/)</code>
 Create a new Model
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
@@ -156,7 +157,7 @@ var User = ziti.define('User', {
 }, { autoId: 'user_id', engine: 'InnoDb', tableName: 'user' });
 ```
 <a name="Db+get"></a>
-### db.get(name) ⇒ <code>[Model](/api/model)</code>
+### db.get(name) ⇒ <code>[Model](/api/model/)</code>
 Get a Model from its name
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
@@ -175,6 +176,7 @@ End all connections
 Provide a connection from the pool to the callback
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
+**Resolve**: <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -187,6 +189,7 @@ It commits the change when the callback returns.
 If something goes wrong in the callback (exception or a promise rejected), it rollbacks instead.
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
+**Resolve**: <code>[PoolConnection](https://github.com/felixge/node-mysql#pooling-connections)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -213,6 +216,7 @@ ziti.withTx(function (tx) {
 Send a SQL query
 
 **Kind**: instance method of <code>[Db](#Db)</code>  
+**Resolve**: <code>(Array.&lt;Object&gt;\|Object)</code>  
 
 | Param | Type | Description |
 | --- | --- | --- |
