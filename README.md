@@ -71,10 +71,13 @@ For more information, you can read the [Guide](http://ziti.ewdl.org/en/latest/tu
 
 ## Tests
 
-To run tests on ziti, first take a look at the [config](/test/config.js) to use your own test server
+Tests results are [available](http://ziti.ewdl.org/en/latest/tests/).
 
-Then, just run:
+However, if you want to run tests on your own, first take a look at the [config](/test/config.js) file to use your own test server.
 
 ```
+export MYSQL_HOST=localhost
+export MYSQL_USER=root
+export MYSQL_DATABASE=ziti_test
 npm test
 ```
