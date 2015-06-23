@@ -226,7 +226,7 @@ describe('Associations', function () {
                 }).finally(done).catch(done);
         });
 
-        it('should find multiple sources and all their associations as Model instances', function (done) {
+        it('should find multiple sources and all their associations as raw data', function (done) {
             User.all().raw().asc('id')
                 .then(function (users) {
                     expect(users).to.be.an('array').and.to.have.length(3);
@@ -239,6 +239,32 @@ describe('Associations', function () {
                     expect(users[0].photos).to.be.ok.and.to.be.an('array');
                     expect(users[1].photos).to.be.ok.and.to.be.an('array');
                     expect(users[2].photos).to.be.ok.and.to.be.an('array');
+                }).finally(done).catch(done);
+        });
+
+        it('should set unique associations to null', function (done) {
+            Phone.save({ number: 12345678, user: scope.users[0] })
+                .then(function () {
+                    return User.all().raw().asc('id');
+                }).then(function (users) {
+                    expect(users[0].phone).to.be.ok.and.to.be.an('object');
+                    expect(users[0].phone.number).to.equals(12345678);
+                    expect(users[1].phone).to.be.null;
+                    expect(users[2].phone).to.be.null;
+                }).finally(done).catch(done);
+        });
+
+        it('should set multiple associations to empty array', function (done) {
+            Photo.remove()
+                .then(function () {
+                    return Photo.save({ path: 'am.jpg', user_id: scope.users[0].id });
+                }).then(function () {
+                    return User.all().raw().asc('id');
+                }).then(function (users) {
+                    expect(users[0].photos).to.be.an('array').and.to.have.length(1);
+                    expect(users[0].photos[0].path).to.equals('am.jpg');
+                    expect(users[1].photos).to.be.an('array').and.to.have.length(0);
+                    expect(users[2].photos).to.be.an('array').and.to.have.length(0);
                 }).finally(done).catch(done);
         });
 

@@ -3,6 +3,7 @@ var Address = require('./address');
 var Photo = require('./photo');
 var Language = require('./language');
 var Friend = require('./friend');
+var Phone = require('./phone');
 
 var User = ziti.define('User', {
     firstname: ziti.String().default(null).unique('name'),
@@ -13,6 +14,7 @@ var User = ziti.define('User', {
     photos: [ Photo ],
     langs: [ Language, 'UserLanguage' ],
     friends: ziti.Many('User').relatedName('user').through(Friend).relatedName('target'),
+    phone: Phone,
     signup_date: ziti.Datetime().default(ziti.NOW)
 });
 
