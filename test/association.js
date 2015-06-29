@@ -37,7 +37,7 @@ describe('Associations', function () {
             var UserLanguage = ziti.get('UserLanguage');
             expect(UserLanguage).to.be.ok;
             expect(UserLanguage._core).to.have.property('user_id');
-            expect(UserLanguage._core).to.have.property('langs_id');
+            expect(UserLanguage._core).to.have.property('language_id');
             done();
         });
 
@@ -142,7 +142,7 @@ describe('Associations', function () {
                 for (var i = 0, len = scope.users.length; i < len; ++i) {
                         for (var j = 0, jlen = langs.length; j < jlen; ++j) {
                             if ((i + j) % 3 === 2) { continue; }
-                            ul.push({ user_id: scope.users[i].id, langs_id: langs[j].get('id') });
+                            ul.push({ user_id: scope.users[i].id, language_id: langs[j].get('id') });
                         }
                 }
                 return UserLanguage.save(ul);
@@ -268,6 +268,13 @@ describe('Associations', function () {
                 }).finally(done).catch(done);
         });
 
+
+        // it('should test something', function (done) {
+        //     ziti.query({ sql: 'SELECT * FROM (SELECT * FROM `user` WHERE `id` = 1) `User` LEFT JOIN  `user_language` `UserLanguage` ON `UserLanguage`.`user_id` = `User`.`id` LEFT JOIN `language` `UserLanguage.language` ON `UserLanguage.language`.`id` = `UserLanguage`.`langs_id`' })
+        //         .spread(function (results) {
+        //             console.log(results);
+        //         }).finally(done).catch(done);
+        // });
     });
 
 });

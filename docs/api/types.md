@@ -696,7 +696,8 @@ One to one association
 
 <a name="Reference+on"></a>
 ### foreignKey.on(link) ↩︎
-Set a link between source and target using { sourceField: targetField }
+Set a link between source and target in the form:
+`{ leftField1: rightField1, leftField2: rightField2 }`
 
 **Kind**: instance method of <code>[ForeignKey](#ForeignKey)</code>  
 **Chainable**  
@@ -833,7 +834,8 @@ to an existing ForeignKey attribute in the target
 
 <a name="Reference+on"></a>
 ### one.on(link) ↩︎
-Set a link between source and target using { sourceField: targetField }
+Set a link between source and target in the form:
+`{ leftField1: rightField1, leftField2: rightField2 }`
 
 **Kind**: instance method of <code>[One](#One)</code>  
 **Chainable**  
@@ -1008,7 +1010,8 @@ var User = ziti.define('User', {
 ```
 <a name="Reference+on"></a>
 ### many.on(link) ↩︎
-Set a link between source and target using { sourceField: targetField }
+Set a link between source and target in the form:
+`{ leftField1: rightField1, leftField2: rightField2 }`
 
 **Kind**: instance method of <code>[Many](#Many)</code>  
 **Chainable**  

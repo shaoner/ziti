@@ -60,7 +60,7 @@ A Many to many referenced model should exists and have a both foreign keys.
 var UserLanguage = ziti.get('UserLanguage');
 expect(UserLanguage).to.be.ok;
 expect(UserLanguage._core).to.have.property('user_id');
-expect(UserLanguage._core).to.have.property('langs_id');
+expect(UserLanguage._core).to.have.property('language_id');
 done();
 ```
 
@@ -174,7 +174,7 @@ Language.save([
     for (var i = 0, len = scope.users.length; i < len; ++i) {
             for (var j = 0, jlen = langs.length; j < jlen; ++j) {
                 if ((i + j) % 3 === 2) { continue; }
-                ul.push({ user_id: scope.users[i].id, langs_id: langs[j].get('id') });
+                ul.push({ user_id: scope.users[i].id, language_id: langs[j].get('id') });
             }
     }
     return UserLanguage.save(ul);
