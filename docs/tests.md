@@ -141,13 +141,13 @@ should insert One to Many Model targets.
 ```js
 Photo.save([
     { path: 'am.jpg', user_id: scope.users[0].id },
-    { path: 'stram.jpg', user_id: scope.users[0].id },
+    { path: 'stram.png', user_id: scope.users[0].id },
     { path: 'gram.jpg', user_id: scope.users[0].id },
     { path: 'hello.jpg', user_id: scope.users[1].id },
     { path: 'world.jpg', user_id: scope.users[1].id },
     { path: 'foo.jpg', user_id: scope.users[2].id },
-    { path: 'bar.jpg', user_id: scope.users[2].id },
-    { path: 'pipo.jpg', user_id: scope.users[2].id },
+    { path: 'bar.png', user_id: scope.users[2].id },
+    { path: 'pipo.png', user_id: scope.users[2].id },
     { path: 'bimbo.jpg', user_id: scope.users[2].id }
 ]).then(function (photos) {
     scope.photos = [ ];
@@ -247,6 +247,31 @@ User.at({ id: scope.users[0].id }).raw()
         expect(user).to.have.property('langs');
         expect(user.langs[0].name).to.equals('english');
     }).finally(done).catch(done);
+```
+
+should find the source by pk and some of its associations filtered.
+
+```js
+User.at({
+    id: scope.users[0].id,
+    photos: { path: { $like: '%.png' } },
+    langs: { name: 'french' }
+}).then(function (user) {
+    expect(user).to.be.an.instanceof(ModelInstance);
+    var raw = user.raw();
+    expect(raw).to.have.property('firstname', 'dexter');
+    expect(raw).to.have.property('address');
+    expect(raw.address.street).to.equals('jump street');
+    expect(raw).to.have.property('photos');
+    expect(raw.photos).to.be.an('array').and.to.have.length(1);
+    expect(raw.photos[0].path).to.equals('stram.png');
+    expect(raw).to.have.property('langs');
+    expect(raw.langs).to.be.an('array').and.to.have.length(1);
+    expect(raw.langs[0].name).to.equals('french');
+    expect(raw.friends).to.be.an('array').and.to.have.length(2);
+    expect(raw.friends[0]).to.have.property('nickname');
+    expect(raw.friends[1]).to.have.property('nickname');
+}).finally(done).catch(done);
 ```
 
 <a name="associations-all"></a>
