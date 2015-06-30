@@ -4,6 +4,8 @@
 
 * [Query](#Query)
   * [.only([...attributes])](#Query+only) ↩︎
+  * [.with([...attributes])](#Query+with) ↩︎
+  * [.without([...attributes])](#Query+without) ↩︎
   * [.$(scope)](#Query+$) ↩︎
   * [.at(where)](#Query+at) ↩︎
   * [.limit(max)](#Query+limit) ↩︎
@@ -43,7 +45,47 @@ This overrides any scope
 ```js
 User.at({ id: 42 }).only('name', 'age')
     .then(function (user) {
-        // SELECT `User`.`name`, `User`.`age` FROM `user` `User`
+        // SELECT `User`.`id`, `User`.`name`, `User`.`age` FROM `user` `User`
+        // WHERE `User`.`id` = 42
+        // LIMIT 1
+    });
+```
+<a name="Query+with"></a>
+### query.with([...attributes]) ↩︎
+Append the provided attributes
+
+**Kind**: instance method of <code>[Query](#Query)</code>  
+**Chainable**  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [...attributes] | <code>string</code> | Attributes to append |
+
+**Example**  
+```js
+User.at({ id: 42 }).only('name').with('age')
+    .then(function (user) {
+        // SELECT `User`.`id`, `User`.`name`, `User`.`age` FROM `user` `User`
+        // WHERE `User`.`id` = 42
+        // LIMIT 1
+    });
+```
+<a name="Query+without"></a>
+### query.without([...attributes]) ↩︎
+Remove the provided attributes
+
+**Kind**: instance method of <code>[Query](#Query)</code>  
+**Chainable**  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [...attributes] | <code>string</code> | Attributes to remove |
+
+**Example**  
+```js
+User.at({ id: 42 }).only('id', 'name', 'age').without('name')
+    .then(function (user) {
+        // SELECT `User`.`id`, `User`.`age` FROM `user` `User`
         // WHERE `User`.`id` = 42
         // LIMIT 1
     });

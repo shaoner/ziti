@@ -914,6 +914,32 @@ ziti.withConnection(function (co) {
 }).catch(done);
 ```
 
+should retrieve all default attributes but one.
+
+```js
+Animal.at({ name: scope.animal.name }).without('name')
+    .then(function (animal) {
+        expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+        expect(animal.get('id')).to.equals(scope.animal.id);
+        expect(animal.get('name')).to.equals('');
+        done();
+    }).catch(done);
+```
+
+should retrieve a subset of attributes + 1.
+
+```js
+Animal.at({ name: scope.animal.name }).only('id').with('name')
+    .then(function (animal) {
+        expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+        expect(animal.get('id')).to.equals(scope.animal.id);
+        expect(animal.get('name')).to.equals('winnie');
+        expect(animal.get('age')).to.equals(0);
+        expect(animal.get('kind')).to.be.undefined;
+        done();
+    }).catch(done);
+```
+
 <a name="model-all"></a>
 ## #all()
 should find multiple data and get an array of Model instances.

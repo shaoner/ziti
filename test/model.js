@@ -241,6 +241,28 @@ describe('Model', function () {
             }).catch(done);
         });
 
+        it('should retrieve all default attributes but one', function (done) {
+            Animal.at({ name: scope.animal.name }).without('name')
+                .then(function (animal) {
+                    expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(animal.get('id')).to.equals(scope.animal.id);
+                    expect(animal.get('name')).to.equals('');
+                    done();
+                }).catch(done);
+        });
+
+        it('should retrieve a subset of attributes + 1', function (done) {
+            Animal.at({ name: scope.animal.name }).only('id').with('name')
+                .then(function (animal) {
+                    expect(animal).to.be.ok.and.to.be.an.instanceof(ModelInstance);
+                    expect(animal.get('id')).to.equals(scope.animal.id);
+                    expect(animal.get('name')).to.equals('winnie');
+                    expect(animal.get('age')).to.equals(0);
+                    expect(animal.get('kind')).to.be.undefined;
+                    done();
+                }).catch(done);
+        });
+
     });
 
     describe('#all()', function () {
