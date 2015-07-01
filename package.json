@@ -31,8 +31,8 @@
   },
   "homepage": "http://ziti.ewdl.org/",
   "dependencies": {
-    "bluebird": "~2.9.27",
-    "lodash": "~3.9.3",
+    "bluebird": "~2.9.30",
+    "lodash": "~3.10.0",
     "mysql": "~2.7.0"
   },
   "devDependencies": {
