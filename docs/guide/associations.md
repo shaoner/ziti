@@ -190,7 +190,8 @@ This tells that a user_name field will be added to the Address model related to 
 
 ### relatedName
 
-Since you can declare an explicit [ForeignKey](/api/types/#ForeignKey) when defining a model, it is necessary to identify it when refering the foreign key in another Model. For example:
+Since you can declare an explicit [ForeignKey](/api/types/#ForeignKey) when defining a model, it is necessary to identify it when refering the foreign key in another Model. It links relationships between two models.
+For example:
 
 ```javascript
 var Address = ziti.define('Address', {
@@ -203,4 +204,37 @@ var User = ziti.define('User', {
     name: ziti.String,
     address: ziti.One(Address).relatedName('owner')
 });
+```
+
+## Retrieving associations
+
+By default, associations defined in a Model are also included when retrieving data from this Model.
+It is possible to define your own scope to only retrieve the Model fields you want.
+For example:
+
+```javascript
+var User = ziti.define('User', {
+    name: ziti.String().$('profile'),
+    address: ziti.One(Address).relatedName('owner')
+});
+
+User.at({ name: 'Alex' }).$('profile').raw()
+    .then(function (user) {
+        console(user);
+        /*
+        { name: 'Alex' }
+        */
+    });
+```
+
+It is also possible to retrieve a specific field that belongs to a reference using `reference.field` notation.
+For example:
+```javascript
+User.at({ name: 'Alex' }).only('name', 'address.street').raw()
+    .then(function (user) {
+        console(user);
+        /*
+        { name: 'Alex', address: { id: 1, street: 'jumpstreet' } }
+        */
+    });
 ```

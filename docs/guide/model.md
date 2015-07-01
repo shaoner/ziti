@@ -133,7 +133,7 @@ Animal.at({ type: 'cat' }).then(function (animal) {
 For conveniency, you can simply use the [Promise#call](https://github.com/petkaantonov/bluebird/blob/master/API.md#callstring-propertyname--dynamic-arg---promise) method to have raw data instead of a model instance:
 
 ```javascript
-Animal.at({ type: 'cat' }).call('raw').then(function (animal) {
+Animal.at({ type: 'cat' }).raw().then(function (animal) {
     console.log(animal);
     // { id: 1, type: 'cat' }
 });
@@ -157,6 +157,122 @@ Animal.all({ id: { $lt: 10 } }).then(function (animals) {
 });
 ```
 
+### Filter the attributes
+
+You may want to retrieve a subset of attributes.
+
+*Note that primary keys are always included to help identifying the data*.
+
+#### Scopes
+
+You can define a scope within your Model definition by using the [$](/api/types/#AbstractType+$) function.
+
+```javascript
+var Animal = ziti.define('Animal', {
+    type: ziti.String().default(null).$('profile'),
+    name: ziti.String().notNull().$('profile'),
+    age: ziti.Int().default(0).$('profile'),
+    creation_date: ziti.Datetime().default(ziti.NOW)
+});
+```
+
+Here a scope named *profile* has been defined and it includes fields: *type*, *name*, and *age*.
+It is now possible to retrieve only data included into this scope, so this excludes the field *creation_date*:
+
+```javascript
+Animal.all({ age: { $lt: 0 } }).$('profile')
+    .then(function (animals) {
+        // SELECT `Animal`.`id`, `Animal`.`type`, `Animal`.`name`, `Animal`.`age`
+        // FROM `animal` `Animal`
+        // WHERE `Animal`.`age` > 0
+    });
+```
+
+Notice that you can define multiple scopes by fields.
+
+#### Specifying fields
+
+You can use [only](/api/query/#Query+only) to only get some fields:
+
+```javascript
+Animal.all({ age: { $lt: 0 } }).only('type', 'creation_date')
+    .then(function (animals) {
+        // SELECT `Animal`.`id`, `Animal`.`type`, `Animal`.`creation_date`
+        // FROM `animal` `Animal`
+        // WHERE `Animal`.`age` > 0
+    });
+```
+
+#### Additional or less fields
+
+For additional fields, use [with](/api/query/#Query+with):
+
+```javascript
+Animal.all({ age: { $lt: 0 } }).only('type', 'creation_date').with('age')
+    .then(function (animals) {
+        // SELECT `Animal`.`id, `Animal`.`type`, `Animal`.`creation_date`, `Animal`.`age`
+        // FROM `animal` `Animal`
+        // WHERE `Animal`.`age` > 0
+    });
+```
+
+To exclude fields, use [without](/api/query/#Query+without):
+
+```javascript
+Animal.all({ age: { $lt: 0 } }).only('type', 'creation_date', 'age').without('age')
+    .then(function (animals) {
+        // SELECT `Animal`.`id, `Animal`.`type`, `Animal`.`creation_date`
+        // FROM `animal` `Animal`
+        // WHERE `Animal`.`age` > 0
+    });
+```
+
+This is mainly useful when it's combined with a scope or to retrieve association of associations (see [here](/guide/associations/#retrieving-associations) for more details):
+
+```javascript
+Animal.all({ age: { $lt: 0 } }).$('profile').with('creation_date').without('age')
+    .then(function (animals) {
+        // SELECT `Animal`.`id`, `Animal`.`type`, `Animal`.`name`, `Animal`.`creation_date`
+        // FROM `animal` `Animal`
+        // WHERE `Animal`.`age` > 0
+    });
+```
+
+### Plain objects
+
+By default when retrieving data, [model instances](/guide/instance/) are built with these data.
+To retrieve data as plain objects instead, use [raw](/api/query/#Query+raw).
+
+```javascript
+Animal.all({ age: { $lt: 0 } }).raw()
+    .then(function (animals) {
+         /*
+          [
+             { id: 1, type: 'lion', name: 'simba', age: 1, creation_date: '...' },
+             { id: 2, type: 'lion', name: 'mufasa', age: 10, creation_date: '...' }
+          ]
+         */
+    });
+```
+
+This is equivalent to:
+
+```javascript
+Animal.all({ age: { $lt: 0 } })
+    .then(function (animals) {
+         return animals.map(function (animal) { return animal.raw(); });
+    }).then(function (animals) {
+         /*
+          [
+             { id: 1, type: 'lion', name: 'simba', age: 1, creation_date: '...' },
+             { id: 2, type: 'lion', name: 'mufasa', age: 10, creation_date: '...' }
+          ]
+         */
+    });
+```
+
+Except that the second form [model instances](/guide/instance/) are built before calling raw
+
 ## Updating data
 
 This updates rows with new values in the associated database table.
@@ -164,7 +280,19 @@ This updates rows with new values in the associated database table.
 ```javascript
 Animal.update({ type: 'horse' }, { $or: [ { type: 'dog' }, { type: 'cat' } ] })
    .then(function () {
-        // UPDATE `animal` `Animal` SET `type` = 'horse' WHERE `Animal`.`type` = 'dog' OR `Animal`.`type` = 'cat'
+        // UPDATE `animal` `Animal` SET `type` = 'horse'
+        // WHERE `Animal`.`type` = 'dog' OR `Animal`.`type` = 'cat'
+        console.log('Cats and dogs turned into horses! Without any drugs!');
+   });
+```
+
+It is also possible to use the [at](/api/query/#Query+at) syntax:
+
+```javascript
+Animal.at({ $or: [ { type: 'dog' }, { type: 'cat' } ] }).update({ type: 'horse' })
+   .then(function () {
+        // UPDATE `animal` `Animal` SET `type` = 'horse'
+        // WHERE `Animal`.`type` = 'dog' OR `Animal`.`type` = 'cat'
         console.log('Cats and dogs turned into horses! Without any drugs!');
    });
 ```
@@ -175,7 +303,18 @@ This removes rows in the associated database table.
 
 ```javascript
 Animal.remove({ type: 'horse' }).then(function () {
-    // DELETE FROM `Animal` USING `animal` `Animal` WHERE `Animal`.`type` = 'horse'
+    // DELETE FROM `Animal` USING `animal` `Animal`
+    // WHERE `Animal`.`type` = 'horse'
+    console.log('Horses are all dead!');
+});
+```
+
+Or with the [at](/api/query/#Query+at) syntax:
+
+```javascript
+Animal.at({ type: 'horse' }).remove().then(function () {
+    // DELETE FROM `Animal` USING `animal` `Animal`
+    // WHERE `Animal`.`type` = 'horse'
     console.log('Horses are all dead!');
 });
 ```
