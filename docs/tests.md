@@ -34,6 +34,7 @@
      - [#sum(), #min(), #max(), #count()](#model-sum-min-max-count)
    - [Queries](#queries)
      - [Raw queries](#queries-raw-queries)
+     - [Expressions](#queries-expressions)
 <a name=""></a>
  
 <a name="associations"></a>
@@ -1251,5 +1252,218 @@ Animal.query([ 'SELECT ?? FROM ?? WHERE ?? > ?', [ 'kind', 'name' ],
         expect(result[0]).to.have.property('kind');
         expect(result[0]).to.have.property('name');
     }).finally(done).catch(done);
+```
+
+<a name="queries-expressions"></a>
+## Expressions
+should build the expression: a = b.
+
+```js
+var expr = Utils.parseExpr('foo', { id: 1 });
+expect(expr.sql).to.equals('`foo`.?? = ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a = b AND c = d.
+
+```js
+var expr = Utils.parseExpr('foo', { id: 1, name: 'bar' });
+expect(expr.sql).to.equals('`foo`.?? = ? AND `foo`.?? = ?');
+expect(expr.values).to.eql([ 'id', 1, 'name', 'bar' ]);
+done();
+```
+
+should build the expression: a = b AND c = d (2nd form).
+
+```js
+var expr = Utils.parseExpr('foo', { $and: [ { id: 1 }, { name: 'bar' } ] });
+expect(expr.sql).to.equals('(`foo`.?? = ? AND `foo`.?? = ?)');
+expect(expr.values).to.eql([ 'id', 1, 'name', 'bar' ]);
+done();
+```
+
+should build the expression: a = b OR c = d.
+
+```js
+var expr = Utils.parseExpr('foo', { $or: [ { id: 1 }, { name: 'bar' } ] });
+expect(expr.sql).to.equals('(`foo`.?? = ? OR `foo`.?? = ?)');
+expect(expr.values).to.eql([ 'id', 1, 'name', 'bar' ]);
+done();
+```
+
+should build the expression: (a = b AND c = d) OR (e = f).
+
+```js
+var expr = Utils.parseExpr('foo', {
+    $or: [ { $and: [ { id: 1 }, { name: 'bar' } ] }, { name: 'foo' } ]
+});
+expect(expr.sql).to.equals('((`foo`.?? = ? AND `foo`.?? = ?) OR `foo`.?? = ?)');
+expect(expr.values).to.eql([ 'id', 1, 'name', 'bar', 'name', 'foo' ]);
+done();
+```
+
+should build the expression: (a = b AND c = d) OR (e = f).
+
+```js
+var expr = Utils.parseExpr('foo', {
+    $or: [ { $and: [ { id: 1 }, { name: 'bar' } ] }, { name: 'foo' } ]
+});
+expect(expr.sql).to.equals('((`foo`.?? = ? AND `foo`.?? = ?) OR `foo`.?? = ?)');
+expect(expr.values).to.eql([ 'id', 1, 'name', 'bar', 'name', 'foo' ]);
+done();
+```
+
+should build the expression: a = b (2nd form).
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $eq: 1 } });
+expect(expr.sql).to.equals('`foo`.?? = ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a = b (3rd form).
+
+```js
+var expr = Utils.parseExpr('foo', { $eq: { id: 1 } });
+expect(expr.sql).to.equals('`foo`.?? = ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a > b.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $gt: 1 } });
+expect(expr.sql).to.equals('`foo`.?? > ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a >= b.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $ge: 1 } });
+expect(expr.sql).to.equals('`foo`.?? >= ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a < b.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $lt: 1 } });
+expect(expr.sql).to.equals('`foo`.?? < ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a <= b.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $le: 1 } });
+expect(expr.sql).to.equals('`foo`.?? <= ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a != b.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $ne: 1 } });
+expect(expr.sql).to.equals('`foo`.?? != ?');
+expect(expr.values).to.eql([ 'id', 1 ]);
+done();
+```
+
+should build the expression: a NOT NULL.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $not: null } });
+expect(expr.sql).to.equals('`foo`.?? NOT ?');
+expect(expr.values).to.eql([ 'id', null ]);
+done();
+```
+
+should build the expression: a IS NULL.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $is: null } });
+expect(expr.sql).to.equals('`foo`.?? IS ?');
+expect(expr.values).to.eql([ 'id', null ]);
+done();
+```
+
+should build the expression: a IS NOT NULL.
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $nis: null } });
+expect(expr.sql).to.equals('`foo`.?? IS NOT ?');
+expect(expr.values).to.eql([ 'id', null ]);
+done();
+```
+
+should build the expression: a LIKE '%xxx%'.
+
+```js
+var expr = Utils.parseExpr('foo', { name: { $like: '%xxx%' } });
+expect(expr.sql).to.equals('`foo`.?? LIKE ?');
+expect(expr.values).to.eql([ 'name', '%xxx%' ]);
+done();
+```
+
+should build the expression: a NOT LIKE '%xxx%'.
+
+```js
+var expr = Utils.parseExpr('foo', { name: { $nlike: '%xxx%' } });
+expect(expr.sql).to.equals('`foo`.?? NOT LIKE ?');
+expect(expr.values).to.eql([ 'name', '%xxx%' ]);
+done();
+```
+
+should build the expression: a IN (x, y, z).
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $in: [ 1, 2, 3 ] } });
+expect(expr.sql).to.equals('`foo`.?? IN (?)');
+expect(expr.values).to.eql([ 'id', [ 1, 2, 3 ] ]);
+done();
+```
+
+should build the expression: a NOT IN (x, y, z).
+
+```js
+var expr = Utils.parseExpr('foo', { id: { $nin: [ 1, 2, 3 ] } });
+expect(expr.sql).to.equals('`foo`.?? NOT IN (?)');
+expect(expr.values).to.eql([ 'id', [ 1, 2, 3 ] ]);
+done();
+```
+
+should build the expression: a REGEXP '^x.*x$'.
+
+```js
+var expr = Utils.parseExpr('foo', { name: { $regexp: '^x.*x$' } });
+expect(expr.sql).to.equals('`foo`.?? REGEXP ?');
+expect(expr.values).to.eql([ 'name', '^x.*x$' ]);
+done();
+```
+
+should build a raw expression from an array with parameters.
+
+```js
+var expr = Utils.parseExpr('foo', [ '`name` = ??', 'bar' ]);
+expect(expr.sql).to.equals('`name` = ??');
+expect(expr.values).to.eql([ 'bar' ]);
+done();
+```
+
+should build a raw expression from a string.
+
+```js
+var expr = Utils.parseExpr('foo', '`name` = \'bar\'');
+expect(expr.sql).to.equals('`name` = \'bar\'');
+expect(expr.values).to.eql([ ]);
+done();
 ```
 
