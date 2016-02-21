@@ -21,6 +21,6 @@ Features:
 
 ---
 
-[Getting started](/tutorial/getting-started/)
+[Getting started](/guide/getting-started/)
 
 
